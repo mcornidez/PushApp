@@ -27,21 +27,21 @@
           <v-icon>mdi-home</v-icon>
         </v-btn>
         <v-btn
-            to="/rutinas"
+            to="/routines"
             text
         >
           <span class="mr-2">Mis Rutinas</span>
           <v-icon>mdi-heart-multiple</v-icon>
         </v-btn>
         <v-btn
-            href="https://github.com/vuetifyjs/vuetify/releases/latest"
+            to="/explore"
             text
         >
           <span class="mr-2">Explorar</span>
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <v-btn
-            href="https://github.com/vuetifyjs/vuetify/releases/latest"
+            to="/help"
             text
         >
           <span class="mr-2">Ayuda</span>
@@ -53,15 +53,13 @@
 
       <div>
         <v-btn
-            href="https://github.com/vuetifyjs/vuetify/releases/latest"
-            target="_blank"
+            to="/routines"
             text
         >
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn>
         <v-btn
-            href="https://github.com/vuetifyjs/vuetify/releases/latest"
-            target="_blank"
+            to="/login"
             text
         >
           <v-icon>mdi-account-outline</v-icon>

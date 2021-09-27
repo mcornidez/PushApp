@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-content>
-      <NavBar/>
       <div id="app">
+        <NavBar/>
         <div id="nav">
           <router-link to="/">Welcome</router-link> |
           <router-link to="/rutinas">Rutinas</router-link>
