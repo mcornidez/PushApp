@@ -3,10 +3,6 @@
     <v-content>
       <div id="app">
         <NavBar/>
-        <div id="nav">
-          <router-link to="/">Welcome</router-link> |
-          <router-link to="/rutinas">Rutinas</router-link>
-        </div>
         <router-view/>
       </div>
     </v-content>
@@ -46,5 +42,19 @@
       color: #42b983;
     }
   }
+}
+
+.input {
+  background-color: white;
+  opacity: 0.7;
+  border: 1px solid #2c3e50;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px;
 }
 </style>

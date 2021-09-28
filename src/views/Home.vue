@@ -87,10 +87,5 @@
 </script>
 
 <style>
-  #app {
-    background: url('https://images.pexels.com/photos/3076513/pexels-photo-3076513.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')
-      no-repeat center center fixed !important;
-    background-size: cover;
-  }
 
 </style>
