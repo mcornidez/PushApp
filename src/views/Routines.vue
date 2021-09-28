@@ -6,58 +6,40 @@
           Sus rutinas son:
         </h1>
       </v-col>
-
-      <v-col
-          class="mb-5"
-          cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-              v-for="(link, i) in importantLinks"
-              :key="i"
-              :href="link.href"
-              class="subheading mx-3"
-              target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
+      <div class="routines">
+        <div v-for="routine in routines" :key="routine.name">
+          <router-link :to="{name: 'RoutineDetails', params:{slug:routine.slug}}">
+            <h2>{{routine.name}}</h2>
+          </router-link>
+          <figure>
+            <router-link :to="routine.name">
+              <img :src='routine.image'/>
+            </router-link>
+          </figure>
+        </div>
+      </div>
     </v-row>
   </v-container>
 </template>
 
 <script>
+
+import store from "@/store"
+
 export default {
   name: 'Rutinas',
-
-  data: () => ({
-    importantLinks: [
-      {
-        text: 'Documentation',
-        href: 'https://vuetifyjs.com',
-      },
-      {
-        text: 'Chat',
-        href: 'https://community.vuetifyjs.com',
-      },
-      {
-        text: 'Made with Vuetify',
-        href: 'https://madewithvuejs.com/vuetify',
-      },
-      {
-        text: 'Twitter',
-        href: 'https://twitter.com/vuetifyjs',
-      },
-      {
-        text: 'Articles',
-        href: 'https://medium.com/vuetify',
-      },
-    ],
-  }),
+  data(){
+    return {
+      routines: store.routines
+    }
+  }
 }
 </script>
+
+<style scoped>
+.routines{
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+</style>

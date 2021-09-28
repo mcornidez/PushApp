@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "routines" */ '../views/Home.vue')
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
   },
   {
     path: '/routines',
@@ -31,18 +31,25 @@ const routes = [
     component: () => import(/* webpackChunkName: "help" */ '../views/Help.vue')
   },
   {
-    path: '/details',
+    path: '/routines/:slug',
     name: 'RoutineDetails',
     component: () => import(/* webpackChunkName: "details" */ '../views/RoutineDetails.vue')
   },
   {
-    path: '/*',
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/Register.vue')
+  },
+  {
+    path: '*',
     name: 'NotFound',
     component: () => import(/* webpackChunkName: "notFound" */ '../views/NotFound.vue')
   }
 ]
 
 const router = new VueRouter({
+  linkExactActiveClass: "my-active-link",
+  mode: "history",
   routes
 })
 

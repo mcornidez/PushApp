@@ -3,7 +3,6 @@
     <v-content>
       <div id="app">
         <NavBar/>
-        <router-view/>
       </div>
     </v-content>
   </v-app>
@@ -24,13 +23,14 @@
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
+/*
 #nav {
   padding: 30px;
 
@@ -43,7 +43,7 @@
     }
   }
 }
-
+*/
 .input {
   background-color: white;
   opacity: 0.7;
@@ -56,5 +56,10 @@
   background-color: #2c3e50;
   color: white;
   padding: 10px;
+}
+
+.test1{
+  width:100%;
+  background-color: red;
 }
 </style>

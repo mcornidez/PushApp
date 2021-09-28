@@ -1,13 +1,50 @@
 <template>
-  <h2>Hello details</h2>
+  <section class="routine">
+    <h1>Routine: {{routine.name}}</h1>
+    <div class="routine-details">
+      <img :src='routine.image' :alt="routine.name"/>
+      <p>{{routine.description}}</p>
+    </div>
+  </section>
 </template>
 
 <script>
+import store from "@/store"
+
 export default {
-  name: "RoutineDetails"
+  name: "RoutineDetails",
+  data(){
+    return{
+      routineId: this.$route.params.id,
+      routineSlug: this.$route.params.slug
+    }
+  },
+  computed: {
+    routine(){
+      return store.routines.find(
+          routine => routine.slug === this.routineSlug
+      )
+    }
+  }
 }
 </script>
 
 <style scoped>
+  img {
+    max-width: 600px;
+    height: auto;
+    width: 100%;
+    max-height: 400px;
+  }
 
+  .routine-details {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  p {
+    margin: 0 40px;
+    font-size: 20px;
+    text-align: justify;
+  }
 </style>

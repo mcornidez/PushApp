@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1>Login</h1>
+    <h1>Iniciar Sesión</h1>
     <br/>
     <div class="form">
       <label for="username">Mail</label>
@@ -9,13 +9,13 @@
       <input v-model="password" type="password" id="password" class="input"/>
       <button @click="login" class="btn">Ingresar</button>
       <br/>
-      <router-link to="/forgotMail">¿Olvidó su mail?</router-link>
-      <router-link to="/forgotPassword">¿Olvidó su contraseña?</router-link>
+      <router-link :to="{name: 'ForgotMail'}">¿Olvidó su mail?</router-link>
+      <router-link :to="{name: 'ForgotPassword'}">¿Olvidó su contraseña?</router-link>
       <label>¿No tiene cuenta? </label>
-      <router-link to="/register">Regístrese</router-link>
+      <router-link :to="{name: 'Register'}">Regístrese</router-link>
       <br/>
       <label>¿Necesita ayuda? </label>
-      <router-link to="/help">Haga click aquí</router-link>
+      <router-link :to="{name: 'Help'}">Haga click aquí</router-link>
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     login(){
       //authenticate
       store.user = this.username;
-      this.$router.push("/routines");
+      this.$router.push({name: 'Home'});
     }
   }
 }
