@@ -1,22 +1,25 @@
 <template>
-  <div class="wrapper">
-    <h1>Registro</h1>
-    <br/>
-    <div class="form">
-      <label for="name">Ingrese su nombre: </label>
-      <input v-model="name" type="text" id="name" class="input"/>
-      <label for="surname">Ingrese su apellido: </label>
-      <input v-model="surname" type="text" id="surname" class="input"/>
-      <label for="mail">Ingrese su mail: </label>
-      <input v-model="mail" type="text" id="mail" class="input"/>
-      <label for="password">Ingrese una contraseña: </label>
-      <input v-model="password" type="password" id="password" class="input"/>
-      <label for="scdmail">Ingrese un segundo mail por si olvida su actual: </label>
-      <input v-model="scdmail" type="text" id="scdmail" class="input"/>
-      <button @click="register" class="btn">Registrarse</button>
+  <div id="background">
+    <div id="mainBody">
+      <div class="form">
+        <br/>
+      <h1>Registro</h1>
       <br/>
-      <label>¿Necesita ayuda? </label>
-      <router-link :to="{name: 'Help'}">Haga click aquí</router-link>
+        <label for="name">Ingrese su nombre: </label>
+        <input v-model="name" type="text" id="name" class="input"/>
+        <label for="surname">Ingrese su apellido: </label>
+        <input v-model="surname" type="text" id="surname" class="input"/>
+        <label for="mail">Ingrese su mail: </label>
+        <input v-model="mail" type="text" id="mail" class="input"/>
+        <label for="password">Ingrese una contraseña: </label>
+        <input v-model="password" type="password" id="password" class="input"/>
+        <label for="scdmail">Ingrese un segundo mail por si olvida su actual: </label>
+        <input v-model="scdmail" type="text" id="scdmail" class="input"/>
+        <button @click="register" class="btn">Registrarse</button>
+        <br/>
+        <label>¿Necesita ayuda? </label>
+        <router-link :to="{name: 'Help'}">Haga click aquí</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -51,11 +54,26 @@ export default {
 
 <style scoped>
 .form{
+  margin-left: 800px;
+  margin-right: 50px;
   display :flex;
   flex-direction: column;
   max-width: 400px;
 }
-.wrapper{
-  margin-left: 800px;
+#background{
+  background-image: url("../assets/fondoHome.jpg");
+  height: 100vh;
+  background-size: cover;
+}
+
+#mainBody{
+  background:rgba(255,255,255,0.8);
+  height:100%;
+}
+
+#rightSide{
+  background-color: #2c3e50;
+  background-size: cover;
+  margin-left: 600px;
 }
 </style>

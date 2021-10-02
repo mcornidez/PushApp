@@ -116,7 +116,7 @@
 
     <v-spacer></v-spacer>
 
-    <div>
+    <div class="d-flex align-center">
       <v-btn
           :to="{name: 'Routines'}"
           text

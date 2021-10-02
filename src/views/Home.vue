@@ -76,40 +76,38 @@
 
 <style scoped>
 
-  #page{
-    background-color:aqua;
-    height: 100vh;
-    width: 100vw;
-    background-position:center;
-    background-size:cover;
-  }
-  #home{
-    background-image: url("../assets/fondoHome.jpg");
-    height: 100vh;
-    background-size: cover;
-  }
-  #welcome{
-    background: rgba(255,255,255,0.5);
-    font-size: xxx-large;
-    color: black;
-    height: 20%;
-  }
-  #welcomeText{
-    color:black;
-    size: auto;
-  }
-
-  #mainBody{
-    background:rgba(255,255,255,0.8);
-    height:100%;
-  }
-  .card{
-    background-color: lightslategrey;
-    width: 100%;
-    height:200px;
-    position:center;
-    border-color: black;
-    border-width: thick;
-
-  }
+#page{
+  background-color:aqua;
+  height: 100vh;
+  width: 100vw;
+  background-position:center;
+  background-size:cover;
+}
+#home{
+  background-image: url("../assets/fondoHome.jpg");
+  height: 100vh;
+  background-size: cover;
+}
+#welcome{
+  background: rgba(255,255,255,0.5);
+  font-size: xxx-large;
+  color: black;
+  height: 20%;
+}
+#welcomeText{
+  color:black;
+  size: auto;
+}
+#mainBody{
+  background:rgba(255,255,255,0.8);
+  height:100%;
+}
+.card {
+  background-color: lightslategrey;
+  width: 100%;
+  height: 200px;
+  position: center;
+  border-color: black;
+  border-width: thick;
+}
 </style>
