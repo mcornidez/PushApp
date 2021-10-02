@@ -1,56 +1,35 @@
 <template>
-  <!--<div id="page">
-    <v-container class="background2" fluid>
-      <v-row class="text-center">
-        <v-col class="mb-4">
-          <h1 class="display-2 font-weight-bold mb-3">
-            ¡Bienvenido {{username}}!
-          </h1>
-        </v-col>
-      </v-row>
-      <v-container class="background" fluid>
-        <v-row>
-          <v-col>
-            <v-card class="card mb-6">
-              Card 1
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card class="card mb-6">
-              Card 2
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-container>
-  </div>-->
   <div id="home">
     <div id="welcome">
-      <span id="welcomeText">¡Bienvenido, {{ username }}!</span>
+      ¡Bienvenido, {{username}}!
     </div>
     <div id="mainBody">
-      <v-container class="container--fluid">
+      <v-container fluid class="cards">
         <v-row>
-          <v-col>
-            <v-card class="md6 card">
+          <v-col cols="6">
+            <v-card>
               <v-icon>mdi-heart-multiple</v-icon>
+              <div>Explorar</div>
             </v-card>
           </v-col>
-          <v-col>
-            <v-card class="md6 card">
+          <v-col cols="6">
+            <v-card>
               <v-icon>mdi-magnify</v-icon>
+              <div> Buscar</div>
             </v-card>
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
-            <v-card class="md6 card">
+          <v-col cols="6">
+            <v-card>
               <v-icon>mdi-magnify</v-icon>
+              <div>Eexplorar</div>
             </v-card>
           </v-col>
-          <v-col>
-            <v-card class="md6 card">
+          <v-col cols="6">
+            <v-card>
               <v-icon>mdi-help-circle-outline</v-icon>
+              <div>Buscar</div>
             </v-card>
           </v-col>
         </v-row>
@@ -60,54 +39,58 @@
 </template>
 
 <script>
-  import store from "@/store";
-
-  export default {
-    name: 'app',
-
-    data(){
-      return{
-        username: store.name
-      }
-    },
-
-  }
+import store from "@/store";
+export default {
+  name: 'app',
+  data(){
+    return{
+      username: store.name
+    }
+  },
+}
 </script>
 
 <style scoped>
 
-#page{
-  background-color:aqua;
-  height: 100vh;
-  width: 100vw;
-  background-position:center;
-  background-size:cover;
-}
 #home{
   background-image: url("../assets/fondoHome.jpg");
-  height: 100vh;
+  height: 85vh;
   background-size: cover;
 }
 #welcome{
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.6);
   font-size: xxx-large;
   color: black;
-  height: 20%;
+  height: 10%;
+  align-content: center;
+  text-align: center;
 }
-#welcomeText{
-  color:black;
-  size: auto;
-}
+
 #mainBody{
-  background:rgba(255,255,255,0.8);
-  height:100%;
+  background: rgba(255,255,255,0.6);
+  background-size: cover;
+  height: 55vh;
 }
 .card {
   background-color: lightslategrey;
-  width: 100%;
+  width: 50%;
   height: 200px;
   position: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align:center;
   border-color: black;
   border-width: thick;
+  align-items: center;
+}
+
+.cards{
+  margin: 0;
+  padding: 0;
+  height:100%;
+  position:center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 </style>

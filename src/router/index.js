@@ -41,6 +41,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "Register" */ '../views/Register.vue')
   },
   {
+    path: '/forgotPassword',
+    name: 'ForgotPassword',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/forgotPassword.vue')
+  },
+  {
+    path: '/forgotMail',
+    name: 'ForgotMail',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/forgotMail.vue')
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: () => import(/* webpackChunkName: "notFound" */ '../views/NotFound.vue')
