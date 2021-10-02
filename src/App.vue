@@ -4,6 +4,7 @@
       <div id="app">
         <NavBar/>
       </div>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
