@@ -5,14 +5,14 @@
     </div>
     <div id="mainBody">
       <v-container fluid class="cards">
-        <v-row>
-          <v-col cols="6">
-            <v-card>
+        <v-row height="100%">
+          <v-col cols="6" height="100px">
+            <v-card height="100%">
               <v-icon>mdi-heart-multiple</v-icon>
               <div>Explorar</div>
             </v-card>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="6" height="100px">
             <v-card>
               <v-icon>mdi-magnify</v-icon>
               <div> Buscar</div>
@@ -54,14 +54,14 @@ export default {
 
 #home{
   background-image: url("../assets/fondoHome.jpg");
-  height: 85vh;
+  height: 100vh;
   background-size: cover;
 }
 #welcome{
   background: rgba(255,255,255,0.6);
   font-size: xxx-large;
   color: black;
-  height: 10%;
+  height: 15vh;
   align-content: center;
   text-align: center;
 }
@@ -69,25 +69,13 @@ export default {
 #mainBody{
   background: rgba(255,255,255,0.6);
   background-size: cover;
-  height: 55vh;
-}
-.card {
-  background-color: lightslategrey;
-  width: 50%;
-  height: 200px;
-  position: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align:center;
-  border-color: black;
-  border-width: thick;
-  align-items: center;
+  height: 100vh;
 }
 
 .cards{
   margin: 0;
   padding: 0;
-  height:100%;
+  height: 100vh;
   position:center;
   flex-direction: column;
   justify-content: center;

@@ -1,6 +1,6 @@
 <template>
     <v-container fluid class="main">
-      <v-row>
+      <v-row class="row">
         <v-col cols="6" class="pa-0 ma-0">
         </v-col>
         <v-col cols="6" class="center">
@@ -26,11 +26,10 @@
             <br>
             <br>
             <label>¿No tiene cuenta? </label>
-            <br>
             <router-link :to="{name: 'Register'}">Regístrese</router-link>
+            <br>
             <br/>
             <label>¿Necesita ayuda? </label>
-            <br>
             <router-link :to="{name: 'Help'}">Haga click aquí</router-link>
           </div>
         </v-col>
@@ -64,12 +63,11 @@ export default {
   position:center;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
   background-image: url("../assets/FondoLogin.jpg");
   background-size: cover;
-  margin: 0;
+  margin:0;
   padding: 0;
-  height:100%;
+  height:100vh;
 }
 
 .form{
@@ -77,6 +75,7 @@ export default {
   height:100vh;
   margin:0;
   padding:0;
+  justify-content: space-between;
 }
 
 input{
@@ -84,20 +83,9 @@ input{
   position: center;
 }
 
-v-row{
-  height:100vh;
-}
-
-v-col{
+.row{
   height:100%;
-  margin: 0;
-  padding: 0;
 }
 
-v-container{
-  position:fixed;
-  width:100vw;
-  height:100vh;
-}
 
 </style>

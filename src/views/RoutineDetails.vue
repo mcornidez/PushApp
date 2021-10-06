@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     routine(){
-      return store.routines.find(
+      return store.exploreRoutines.find(
           routine => routine.slug === this.routineSlug
       )
     }
@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style scoped>
+.routine{
+}
   img {
     max-width: 600px;
     height: auto;
