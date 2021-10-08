@@ -3,8 +3,8 @@
     <div id="mainBody">
       <div class="form">
         <br/>
-      <h1>Registro</h1>
-      <br/>
+        <h1>Registro</h1>
+        <br/>
         <label for="name">Ingrese su nombre: </label>
         <input v-model="name" type="text" id="name" class="input"/>
         <label for="surname">Ingrese su apellido: </label>
@@ -54,12 +54,14 @@ export default {
 
 <style scoped>
 .form{
-  margin-left: 800px;
-  margin-right: 50px;
+  justify-content: center;
+  margin-left:auto;
+  margin-right: auto;
   display :flex;
+  width: 40%;
   flex-direction: column;
-  max-width: 400px;
 }
+
 #background{
   background-image: url("../assets/fondoHome.jpg");
   height: 100vh;
@@ -69,11 +71,5 @@ export default {
 #mainBody{
   background:rgba(255,255,255,0.8);
   height:100%;
-}
-
-#rightSide{
-  background-color: #2c3e50;
-  background-size: cover;
-  margin-left: 600px;
 }
 </style>
