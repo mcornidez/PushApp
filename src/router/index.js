@@ -46,6 +46,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "Register" */ '../views/Register.vue')
   },
   {
+    path: '/Profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "details" */ '../views/Profile.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/forgotPassword',
     name: 'ForgotPassword',
     component: () => import(/* webpackChunkName: "Register" */ '../views/forgotPassword.vue')

@@ -1,15 +1,15 @@
 <template>
   <div class="help">
-    <div id="title">
-      <b>Help</b>
-    </div>
     <div class="body justify-center">
-      <v-expansion-panels>
+      <div id="title">
+        <b>Help</b>
+      </div>
+      <v-expansion-panels inset>
         <v-expansion-panel
             v-for="question in questions"
             :key="question.id" class="panel">
-          <v-expansion-panel-header class="header">
-            {{ question.q }}
+          <v-expansion-panel-header class="header" expand-icon="mdi-arrow-down-drop-circle-outline">
+            <b>{{ question.q }}</b>
           </v-expansion-panel-header>
           <v-expansion-panel-content class="content">
             {{question.a}}
@@ -31,7 +31,6 @@
             full-width
             single-line
             filled
-            shaped
         ></v-textarea>
       </v-form>
     </div>
@@ -72,7 +71,7 @@ export default {
   color: black;
   background-image: url("../assets/FondoHelp.jpg");
   background-size: cover;
-  height:100%;
+  height:100vh;
   vertical-align: middle;
 
 }
@@ -80,9 +79,14 @@ export default {
   font-family: "Raleway", sans-serif;
   font-size: xxx-large;
   padding-bottom: 0;
-  margin-top: auto;
+  margin: auto;
   margin-bottom: 30px;
   vertical-align: middle;
+  border-radius: 15px;
+  width: 40vw;
+  background-color: lightblue;
+  position: center;
+  border: 3px solid black;
 }
 #title2{
   margin-top: 30px;
@@ -100,6 +104,7 @@ export default {
   font-size: large;
 }
 .body{
+  padding-top: 20px;
   width: 80vw;
   justify-content: center;
   margin:auto;
@@ -114,6 +119,7 @@ export default {
   padding-top: 15px;
   padding-left: 10px;
   padding-right: 10px;
+  border-radius: 10px;
 }
 .boton{
   margin-top: 15px;

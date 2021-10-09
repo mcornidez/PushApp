@@ -35,7 +35,6 @@
     <div class="banner">Sus rutinas</div>
     <div class="routines">
       <div v-for="routine in exploreRoutines" :key="routine.name" class="rutina">
-
         <router-link :to="{name: 'RoutineDetails', params:{slug:routine.slug}}">
           <h2>{{routine.name}}</h2>
         </router-link>

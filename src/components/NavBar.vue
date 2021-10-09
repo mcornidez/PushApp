@@ -52,7 +52,7 @@
     <v-icon>mdi-heart-outline</v-icon>
   </v-btn>
   <v-btn
-      :to="{name: 'Login'}"
+      :to="{name: 'Profile'}"
       text
       class="btn">
     <v-icon>mdi-account-outline</v-icon>
