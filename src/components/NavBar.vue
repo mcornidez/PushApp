@@ -15,21 +15,21 @@
   <v-btn
       :to="{name: 'Home'}"
       text
-      class="btn">
+      class="btn" :disabled="!canOperate">
     <span class="mr-2">Inicio</span>
     <v-icon>mdi-home</v-icon>
   </v-btn>
   <v-btn
-      :to="{name: 'Routines'}"
+      :to="{name: 'Routines'} "
       text
-      class="btn">
+      class="btn" :disabled="!canOperate">
     <span class="mr-2">Mis Rutinas</span>
     <v-icon>mdi-heart-multiple</v-icon>
   </v-btn>
   <v-btn
       :to="{name: 'Explore'}"
       text
-      class="btn">
+      class="btn" :disabled="!canOperate">
     <span class="mr-2">Explorar</span>
     <v-icon>mdi-magnify</v-icon>
   </v-btn>
@@ -48,7 +48,7 @@
   <v-btn
       :to="{name: 'Routines'}"
       text
-      class="btn">
+      class="btn" :disabled="!canOperate">
     <v-icon>mdi-heart-outline</v-icon>
   </v-btn>
   <v-btn
@@ -62,8 +62,25 @@
 </template>
 
 <script>
+import {mapState, mapGetters} from 'vuex'
+//import {Credentials} from "../api/user";
+//import {Sport} from "../api/sport";
+
 export default {
-  name: "NavBar.vue"
+  name: "NavBar.vue",
+  computed: {
+    ...mapState('security', {
+        $user: state => state.user,
+      }),
+    ...mapGetters('security', {
+        $isLoggedIn: 'isLoggedIn'
+      }),
+    canOperate() {
+      return true
+      //this.$isLoggedIn
+    },
+  },
+
 }
 </script>
 

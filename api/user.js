@@ -7,6 +7,10 @@ class UserApi {
         return `${Api.baseUrl}/users${ slug ? `/${slug}` : ''}`
     }
 
+    static async add(credentials, controller) {
+        return await Api.post(UserApi.getUrl(), false, credentials, controller)
+    }
+
     static async login(credentials, controller) {
         return await Api.post(UserApi.getUrl('login'), false, credentials, controller)
     }
@@ -21,8 +25,10 @@ class UserApi {
 }
 
 class Credentials {
-    constructor(username, password) {
+    constructor(username, password, email, sec_email) {
         this.username = username
         this.password = password
+        this.email = email
+        this.sec_email = sec_email
     }
 }

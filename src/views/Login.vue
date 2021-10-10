@@ -38,22 +38,57 @@
 </template>
 
 <script>
+//import {Credentials} from "/api/user";
 import store from "@/store"
+import {mapState, mapActions} from 'vuex'
 export default {
   name: "Login",
   data(){
     return {
       username: null,
-      password: null
+      password: null,
+      result: null
     }
   },
+  computed: {
+    ...mapState('security', {
+      $user: state => state.user,
+    }),
+  },
   methods: {
-    login(){
-      //authenticate
+    ...mapActions('security', {
+      $getCurrentUser: 'getCurrentUser',
+      $login: 'login',
+      $logout: 'logout',
+    }),
+    async login() {
+      /*
+      try {
+        const credentials = new Credentials(this.username, this.password)
+        await this.$login({credentials, rememberMe: true})
+        this.clearResult()
+      } catch (e) {
+        this.setResult(e)
+      }
+      */
       store.user = this.username;
       this.$router.push({name: 'Home'});
     }
-  }
+  },
+  async logout() {
+    await this.$logout()
+    this.clearResult()
+  },
+  async getCurrentUser() {
+    await this.$getCurrentUser()
+    this.setResult(this.$user)
+  },
+  clearResult() {
+    this.result = null
+  },
+  setResult(result){
+    this.result = JSON.stringify(result, null, 2)
+  },
 }
 </script>
 
