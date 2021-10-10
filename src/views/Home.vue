@@ -30,37 +30,15 @@
         </router-link>
       </div>
     </div>
-      <!--
-      <v-container fluid class="cards">
-        <v-row width="100vw">
-          <v-col cols="6" height="100vh">
-            <v-card height="100%">
-              <v-icon>mdi-heart-multiple</v-icon>
-              <div>Explorar</div>
-            </v-card>
-          </v-col>
-          <v-col cols="6" height="100px">
-            <v-card>
-              <v-icon>mdi-magnify</v-icon>
-              <div> Buscar</div>
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="6">
-            <v-card>
-              <v-icon>mdi-magnify</v-icon>
-              <div>Eexplorar</div>
-            </v-card>
-          </v-col>
-          <v-col cols="6">
-            <v-card>
-              <v-icon>mdi-help-circle-outline</v-icon>
-              <div>Buscar</div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>-->
+    <div class="aux">
+      <div class="progBar">
+        Progreso: 50%
+      </div>
+      <v-btn :to="{name: 'CurrentRoutine'}" class="boton" fab dark small color="orange"><v-icon dark>mdi-arrow-right-thin-circle-outline</v-icon></v-btn>
+    </div>
+    <!--<div v-if="auxVar === 'true'" id="progBar">
+      <ProgBar/>
+    </div>-->
   </div>
 </template>
 
@@ -70,7 +48,8 @@ export default {
   name: 'app',
   data(){
     return{
-      username: store.name
+      username: store.name,
+      auxVar: 'true'
     }
   },
 }
@@ -105,8 +84,8 @@ export default {
   display: inline-grid;
   margin-top: 8vh;
   background-color: rgba(255,255,255,0.9);
-  width: 90%;
-  height: 70%;
+  width: 80%;
+  height: 60%;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-item {
@@ -116,7 +95,9 @@ export default {
   font-size: 60px;
   text-align: center;
   justify-content: center;
+  overflow: hidden;
 }
+
 .icon{
   margin-top: 40px;
 }
@@ -129,6 +110,32 @@ export default {
   text-underline-color: rgba(0,0,0,0);
 }
 
+.progBar{
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  position: center;
+  background-color: rgba(245, 171, 53, 1);
+  width: 50vw;
+  border-radius: 15px;
+  border: 1px solid black;
+  color: black;
+  font-weight: bolder;
+  font-size: xx-large;
+  justify-content: space-between;
+}
+
+.boton{
+  margin-top: 54px;
+  margin-left: 15px;
+  text-underline: transparent;
+  border: 0.5px solid black;
+}
+
+.aux{
+  display: inline-flex;
+}
 /*
 #mainBody{
   background: rgba(255,255,255,0.6);
