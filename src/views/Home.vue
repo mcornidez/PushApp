@@ -6,25 +6,25 @@
     <!-- Inspirado en https://www.w3schools.com/css/css_grid.asp -->
     <div class="grid-container">
       <div class="grid-item">
-        <v-icon size="80"  class="icon">mdi-heart-multiple</v-icon>
+        <v-icon size="80"  class="icon" color="#2c3e50">mdi-heart-multiple</v-icon>
         <router-link style="text-decoration: none; color: inherit" :to="{name:'Routines'}">
           <div class="subtitulo">Mis Rutinas</div>
         </router-link>
       </div>
       <div class="grid-item">
-        <v-icon size="80"  class="icon">mdi-magnify</v-icon>
+        <v-icon size="80"  class="icon" color="#2c3e50">mdi-magnify</v-icon>
         <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
           <div class="subtitulo">Buscar</div>
         </router-link>
       </div>
       <div class="grid-item">
-        <v-icon size="80" class="icon">mdi-magnify</v-icon>
+        <v-icon size="80" class="icon" color="#2c3e50">mdi-account-circle</v-icon>
         <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
-          <div class="subtitulo">Explorar</div>
+          <div class="subtitulo">Mi Perfil</div>
         </router-link>
       </div>
       <div class="grid-item">
-        <v-icon size="80"  class="icon">mdi-help-circle-outline</v-icon>
+        <v-icon size="80"  class="icon" color="#2c3e50">mdi-help-circle-outline</v-icon>
         <router-link style="text-decoration: none; color: inherit" :to="{name:'Help'}">
           <div class="subtitulo">Ayuda</div>
         </router-link>
@@ -36,9 +36,6 @@
       </div>
       <v-btn :to="{name: 'CurrentRoutine'}" class="boton" fab dark small color="orange"><v-icon dark>mdi-arrow-right-thin-circle-outline</v-icon></v-btn>
     </div>
-    <!--<div v-if="auxVar === 'true'" id="progBar">
-      <ProgBar/>
-    </div>-->
   </div>
 </template>
 
@@ -83,14 +80,18 @@ export default {
 .grid-container {
   display: inline-grid;
   margin-top: 8vh;
-  background-color: rgba(255,255,255,0.9);
+  /*background-color: rgba(255,255,255,0.9);*/
   width: 80%;
   height: 60%;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
 }
 .grid-item {
   /*background-color: rgba(255, 255, 255, 0.8);*/
+  background-color: rgba(255,255,255,0.9);
   border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   padding: 20px;
   font-size: 60px;
   text-align: center;

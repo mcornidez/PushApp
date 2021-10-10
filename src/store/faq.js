@@ -16,8 +16,15 @@ export default{
         {
             id:3,
             q:"¿Es necesario estar en forma para usar la aplicación?",
-            a: "No. La intención es que cualquier persona que bsuque un cambio en su vida pueda encontrar en esta " +
+            a: "No. La intención es que cualquier persona que busque un cambio en su vida pueda encontrar en esta " +
                 "aplicación una manera facil e interactiva de progresar y mejorar su estado físico."
+        },
+        {
+            id:4,
+            q:"¿Como funciona?",
+            a: "PushApp ofrece opciones tanto para crear rutinas personalizadas como para explorar rutinas prearmadas." +
+                "Nuestra intención es que el usuario encuentre (o en su defecto pueda crear) una rutina cuyo tiempo y" +
+                " dificultad sean exactamente las que busca."
         }
     ]
 }

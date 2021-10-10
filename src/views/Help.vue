@@ -33,16 +33,16 @@
             filled
         ></v-textarea>
       </v-form>
+      <v-btn
+          class="boton"
+          rounded
+          color="blue"
+          dark
+          @click="enviarFormulario"
+      >
+        Enviar
+      </v-btn>
     </div>
-    <v-btn
-        class="boton"
-        rounded
-        color="blue"
-        dark
-        @click="enviarFormulario"
-    >
-      Enviar
-    </v-btn>
 
   </div>
 </template>
@@ -70,7 +70,11 @@ export default {
   font-family: "Raleway", sans-serif;
   color: black;
   background-image: url("../assets/FondoHelp.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
   background-size: cover;
+  background-repeat: repeat-y;
   height:100vh;
   vertical-align: middle;
 
@@ -102,6 +106,7 @@ export default {
 }
 .content{
   font-size: large;
+  font-weight: bolder;
 }
 .body{
   padding-top: 20px;
@@ -122,7 +127,6 @@ export default {
   border-radius: 10px;
 }
 .boton{
-  margin-top: 15px;
 }
 
 </style>

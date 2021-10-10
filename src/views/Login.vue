@@ -16,7 +16,7 @@
             <br>
             <input v-model="password" type="password" id="password" class="input"/>
             <br>
-            <button @click="login" class="btn">Ingresar</button>
+            <button @click="login()" class="btn">Ingresar</button>
             <br>
             <br/>
             <router-link :to="{name: 'ForgotMail'}">¿Olvidó su mail?</router-link>
@@ -63,9 +63,9 @@ export default {
   position:center;
   flex-direction: column;
   justify-content: center;
-  background-image: url("../assets/FondoLogin.jpg");
+  background-image: url("../assets/FondoLogin.png");
   background-size: cover;
-  margin:0;
+  margin: 0;
   padding: 0;
   height:100vh;
 }
