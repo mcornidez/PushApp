@@ -40,15 +40,52 @@
 </template>
 
 <script>
-import store from "@/store";
+//import store from "@/store/module/security";
+import {mapActions, mapGetters, mapState} from "vuex";
+
 export default {
   name: 'app',
   data(){
     return{
-      username: store.name,
+      result: null,
+      username: null,
       auxVar: 'true'
     }
   },
+  async created() {
+    await this.getCurrentUser();
+  },
+  computed: {
+    ...mapState('security', {
+      $user: state => state.user,
+    }),
+    ...mapGetters('security', {
+      $isLoggedIn: 'isLoggedIn'
+    }),
+    canCreate() {
+      return this.$isLoggedIn && !this.sport
+    },
+    canOperate() {
+      return this.$isLoggedIn
+      // BORRO this.sport PARA PROBAR
+    },
+    canAbort() {
+      return this.$isLoggedIn && this.controller
+    }
+  },
+  methods:{
+    ...mapActions('security',{
+      $getCurrentUser: 'getCurrentUser'
+    }),
+    setResult(result){
+      this.result = JSON.stringify(result, null, 2)
+    },
+    async getCurrentUser() {
+      await this.$getCurrentUser()
+      this.setResult(this.$user)
+      this.username = this.result.username;
+    },
+  }
 }
 </script>
 
