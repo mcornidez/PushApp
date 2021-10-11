@@ -11,10 +11,10 @@
         <input v-model="surname" type="text" id="surname" class="input"/>
         <label for="mail">Ingrese su mail: </label>
         <input v-model="mail" type="text" id="mail" class="input"/>
+        <label for="user">Ingrese un usuario: </label>
+        <input v-model="user" type="text" id="user" class="input"/>
         <label for="password">Ingrese una contraseña: </label>
         <input v-model="password" type="password" id="password" class="input"/>
-        <label for="scdmail">Ingrese un segundo mail por si olvida su actual: </label>
-        <input v-model="scdmail" type="text" id="scdmail" class="input"/>
         <button @click="register" class="btn">Registrarse</button>
         <br/>
         <label>¿Necesita ayuda? </label>
@@ -34,8 +34,8 @@ export default {
       name: null,
       surname: null,
       mail: null,
+      username: null,
       password: null,
-      scdmail: null
     }
   },
   methods: {
@@ -44,8 +44,8 @@ export default {
       store.name = this.name;
       store.surname = this.surname;
       store.mail = this.mail;
+      store.user = this.user;
       store.password = this.password;
-      store.scdmail = this.scdmail;
       this.$router.push({name: 'Home'});
     }
   }

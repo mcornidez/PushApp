@@ -69,6 +69,7 @@ export default {
     name: null,
     surname: null,
     mail: null,
+    user: null,
     password: null,
-    scdmail: null
+
 }

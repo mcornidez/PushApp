@@ -1,12 +1,9 @@
 <template>
   <div class="mainBody">
-    <h1 id="MainTitle">¿Olvidaste tu mail?</h1>
+    <h1 id="MainTitle">¿Olvidaste tu usuario?</h1>
     <div class="form">
-      <div class="titulo">Introduzca su nombre de usuario:</div>
+      <div class="titulo">Introduzca su mail:</div>
       <input v-model="usuario" type="text" class="inputField"/>
-      <!-- pregunta de seguridad hardcodeada, estaría bueno poder utilizar la API para modificar-->
-      <div class="titulo">Coloque la respuesta a su pregunta de seguridad: ¿Cuál fue el nombre de su primer mascota?</div>
-      <input type="text" class="inputField"/>
       <br>
       <v-btn dark color="blue" class="boton" @click="send">Enviar</v-btn>
       <!-- aca faltaria poner un v-if (valida) que lo lleve a cambiar el usuario

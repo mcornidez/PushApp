@@ -9,18 +9,18 @@
             <br/>
             <h1>Iniciar Sesión</h1>
             <br/>
-            <label for="username">Mail</label>
+            <label for="username">Usuario</label>
             <br>
-            <input v-model="username" type="text" id="username" class="input"/>
+            <input v-model="username" type="text" id="username" class="input" placeholder="Ingrese su usuario"/>
             <br>
             <label for="password">Contraseña</label>
             <br>
-            <input v-model="password" type="password" id="password" class="input"/>
+            <input v-model="password" type="password" id="password" class="input" placeholder="Ingrese su contraseña"/>
             <br>
             <button @click="login" class="btn">Ingresar</button>
             <br>
             <br/>
-            <router-link :to="{name: 'ForgotMail'}">¿Olvidó su mail?</router-link>
+            <router-link :to="{name: 'ForgotUser'}">¿Olvidó su usuario?</router-link>
             <br>
             <br>
             <router-link :to="{name: 'ForgotPassword'}">¿Olvidó su contraseña?</router-link>
