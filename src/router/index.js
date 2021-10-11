@@ -67,6 +67,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "Register" */ '../views/CurrentRoutine.vue')
   },
   {
+    path:'/CreateRoutine',
+    name: 'CreateRoutine',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/CreateRoutine.vue')
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: () => import(/* webpackChunkName: "notFound" */ '../views/NotFound.vue')

@@ -34,6 +34,13 @@
     <v-icon>mdi-magnify</v-icon>
   </v-btn>
   <v-btn
+      :to="{name: 'CreateRoutine'}"
+      text
+      class="btn" :disabled="!canOperate">
+    <span class="mr-2">Crear Rutina</span>
+    <v-icon>mdi-plus-circle-multiple</v-icon>
+  </v-btn>
+  <v-btn
       :to="{name: 'Help'}"
       text
       class="btn">
@@ -57,12 +64,15 @@
       class="btn">
     <v-icon>mdi-account-outline</v-icon>
   </v-btn>
+  <button @click="logout" class="btn">
+    <v-icon>mdi-logout-variant</v-icon>
+  </button>
 </div>
 </div>
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapActions, mapState, mapGetters} from 'vuex'
 //import {Credentials} from "../api/user";
 //import {Sport} from "../api/sport";
 
@@ -70,17 +80,26 @@ export default {
   name: "NavBar.vue",
   computed: {
     ...mapState('security', {
-        $user: state => state.user,
-      }),
+      $user: state => state.user,
+    }),
     ...mapGetters('security', {
-        $isLoggedIn: 'isLoggedIn'
-      }),
+      $isLoggedIn: 'isLoggedIn'
+    }),
     canOperate() {
       return true
       //this.$isLoggedIn
     },
-  },
-
+    methods: {
+      ...mapActions('security', {
+        $getCurrentUser: 'getCurrentUser',
+        $logout: 'logout',
+      }),
+      async logout() {
+        await this.$logout()
+        this.clearResult()
+      },
+    },
+  }
 }
 </script>
 
