@@ -1,21 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import security from '@/store/module/security';
+import security from './module/security';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: { //data
+  state: {
   },
   mutations: {
   },
-  actions: { //methods
-  },
-  getters: { //compute
-
+  actions: {
   },
   modules: {
     security
-  },
-  namespaced: true
+  }
 })
+

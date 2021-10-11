@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import store from "@/store"
+import routines from "@/store/routines"
 
 export default {
   name: "RoutineDetails",
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     routine(){
-      return store.exploreRoutines.find(
+      return routines.exploreRoutines.find(
           routine => routine.slug === this.routineSlug
       )
     }
@@ -32,21 +32,21 @@ export default {
 <style scoped>
 .routine{
 }
-  img {
-    max-width: 600px;
-    height: auto;
-    width: 100%;
-    max-height: 400px;
-  }
+img {
+  max-width: 600px;
+  height: auto;
+  width: 100%;
+  max-height: 400px;
+}
 
-  .routine-details {
-    display: flex;
-    justify-content: space-between;
-  }
+.routine-details {
+  display: flex;
+  justify-content: space-between;
+}
 
-  p {
-    margin: 0 40px;
-    font-size: 20px;
-    text-align: justify;
-  }
+p {
+  margin: 0 40px;
+  font-size: 20px;
+  text-align: justify;
+}
 </style>

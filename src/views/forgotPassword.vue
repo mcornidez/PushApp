@@ -1,18 +1,25 @@
 <template>
-<div class="mainBody">
-  <h1 id="MainTitle">¿Olvidaste tu contraseña?</h1>
-  <div class="form">
-    <div class="titulo">Ingrese su email para enviar un correo de reestablecimiento</div>
-    <input type="text" class="inputField"/>
-    <br>
-    <v-btn dark color="blue" class="boton">Enviar</v-btn>
+  <div class="mainBody">
+    <h1 id="MainTitle">¿Olvidaste tu contraseña?</h1>
+    <div class="form">
+      <div class="titulo">Ingrese su email para enviar un correo de reestablecimiento</div>
+      <input type="text" class="inputField"/>
+      <br>
+      <v-btn dark color="blue" class="boton" @click="send">Enviar</v-btn>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
-  name: "forgotPassword.vue"
+  name: "forgotPassword.vue",
+  methods:{
+    async send(){
+      alert("¡Su solicitud fue procesada! Nos contactaremos a la brevedad.");
+      const redirectPath = this.$route.query.redirect || "/Home";
+      await this.$router.push(redirectPath);
+    }
+  }
 }
 </script>
 

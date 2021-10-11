@@ -20,10 +20,10 @@
     <div id="title2"><b>Contactenos</b></div>
     <div class="contacto">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field class="black--text" v-model="nombre" label="Nombre" required outlined></v-text-field>
-        <v-text-field class="black--text" v-model="email" :rules="emailRules" label="E-mail" outlined> </v-text-field>
+        <v-text-field class="black--text font-weight-bold" v-model="nombre" label="Nombre" required outlined></v-text-field>
+        <v-text-field class="black--text font-weight-bold" v-model="email" :rules="emailRules" label="E-mail" outlined> </v-text-field>
         <v-textarea
-            class="black--text"
+            class="black--text font-weight-bold"
             v-model="title"
             label="Message"
             outlined
@@ -58,8 +58,10 @@ export default {
     };
   },
   methods:{
-    enviarFormulario(){
-      /*Falta ver que hace el formulario*/
+    async enviarFormulario(){
+      alert("¡Su solicitud fue procesada! Nos contactaremos a la brevedad.");
+      const redirectPath = this.$route.query.redirect || "/Home";
+      await this.$router.push(redirectPath);
     }
   }
 };
@@ -70,12 +72,10 @@ export default {
   font-family: "Raleway", sans-serif;
   color: black;
   background-image: url("../assets/FondoHelp.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
   background-position: center;
   background-size: cover;
   background-repeat: repeat-y;
-  height:100vh;
+  height:100%;
   vertical-align: middle;
 
 }
@@ -120,7 +120,7 @@ export default {
   margin-left: auto;
   margin-right:auto;
   background-color: white;
-  margin-bottom: 0;
+  padding-bottom: 15px;
   padding-top: 15px;
   padding-left: 10px;
   padding-right: 10px;

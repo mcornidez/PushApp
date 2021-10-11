@@ -1,9 +1,10 @@
 <template>
+  <div class="aux">
     <v-container fluid class="main">
       <v-row class="row">
         <v-col cols="6" class="pa-0 ma-0">
         </v-col>
-        <v-col cols="6" class="center">
+        <v-col cols="6" class="center ma-0 pa-0">
           <div class="form">
             <br/>
             <h1>Iniciar Sesión</h1>
@@ -16,7 +17,7 @@
             <br>
             <input v-model="password" type="password" id="password" class="input"/>
             <br>
-            <button @click="login()" class="btn">Ingresar</button>
+            <button @click="login" class="btn">Ingresar</button>
             <br>
             <br/>
             <router-link :to="{name: 'ForgotMail'}">¿Olvidó su mail?</router-link>
@@ -35,25 +36,22 @@
         </v-col>
       </v-row>
     </v-container>
+  </div>
 </template>
 
 <script>
-//import {Credentials} from "/api/user";
-import store from "@/store"
-import {mapState, mapActions} from 'vuex'
+import {Credentials} from "../../api/user";
+import {mapActions} from 'vuex'
+
 export default {
-  name: "Login",
-  data(){
+  name: 'App',
+  components: {},
+  data() {
     return {
-      username: null,
-      password: null,
-      result: null
+      result: null,
+      sport: null,
+      controller: null
     }
-  },
-  computed: {
-    ...mapState('security', {
-      $user: state => state.user,
-    }),
   },
   methods: {
     ...mapActions('security', {
@@ -61,39 +59,24 @@ export default {
       $login: 'login',
       $logout: 'logout',
     }),
-    async login() {
-      /*
-      try {
-        const credentials = new Credentials(this.username, this.password)
-        await this.$login({credentials, rememberMe: true})
-        this.clearResult()
-      } catch (e) {
-        this.setResult(e)
-      }
-      */
-      store.user = this.username;
-      this.$router.push({name: 'Home'});
+    async login(){
+      //Este login funciona, faltaría ver tema de captar error si no puede logginear
+      var a = document.getElementById("username").value;
+      var b = document.getElementById("password").value;
+      const credentials = new Credentials(a, b);
+      await this.$login({credentials, rememberMe:false});
+      const redirectPath = this.$route.query.redirect || "/Home";
+      await this.$router.push(redirectPath);
     }
-  },
-  async logout() {
-    await this.$logout()
-    this.clearResult()
-  },
-  async getCurrentUser() {
-    await this.$getCurrentUser()
-    this.setResult(this.$user)
-  },
-  clearResult() {
-    this.result = null
-  },
-  setResult(result){
-    this.result = JSON.stringify(result, null, 2)
-  },
+  }
 }
 </script>
 
 <style scoped>
-
+.aux{
+  font-family: "Raleway", sans-serif;
+  font-weight: bolder;
+}
 .main{
   position:center;
   flex-direction: column;
@@ -102,7 +85,7 @@ export default {
   background-size: cover;
   margin: 0;
   padding: 0;
-  height:100vh;
+  height:100%;
 }
 
 .form{
@@ -110,7 +93,8 @@ export default {
   height:100vh;
   margin:0;
   padding:0;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
+  vertical-align: center;
 }
 
 input{

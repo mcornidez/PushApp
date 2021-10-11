@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
-import store from "@/store";
+import {Api} from "../../api/api";
 
 Vue.use(VueRouter)
 
@@ -80,12 +80,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(route => route.meta.requiresAuth)) {
-    if (!store.user) {
-      next({ name: "Login", query: { redirect: to.fullPath } });
-    } else {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (Api.token) {
       next();
+      return;
     }
+    next("/");
   } else {
     next();
   }

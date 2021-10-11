@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import store from "@/store"
+import routines from "@/store/routines"
 export default {
   name: 'Rutinas',
   data(){
     return {
-      exploreRoutines: store.exploreRoutines
+      exploreRoutines: routines.exploreRoutines
     }
   }
 }
