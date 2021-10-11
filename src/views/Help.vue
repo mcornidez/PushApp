@@ -2,7 +2,7 @@
   <div class="help">
     <div class="body justify-center">
       <div id="title">
-        <b>Help</b>
+        <b>Ayuda</b>
       </div>
       <v-expansion-panels inset>
         <v-expansion-panel
@@ -17,7 +17,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </div>
-    <div id="title2"><b>Contactenos</b></div>
+    <div id="title2"><b>Contáctenos</b></div>
     <div class="contacto">
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-text-field class="black--text font-weight-bold" v-model="nombre" label="Nombre" required outlined></v-text-field>
@@ -25,7 +25,7 @@
         <v-textarea
             class="black--text font-weight-bold"
             v-model="title"
-            label="Message"
+            label="Mensaje"
             outlined
             maxlength="400"
             full-width

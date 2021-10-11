@@ -5,32 +5,32 @@
     </div>
     <!-- Inspirado en https://www.w3schools.com/css/css_grid.asp -->
     <div class="grid-container">
-      <div class="grid-item">
-        <v-icon size="80"  class="icon" color="#2c3e50">mdi-heart-multiple</v-icon>
-        <router-link style="text-decoration: none; color: inherit" :to="{name:'Routines'}">
+      <router-link style="text-decoration: none; color: inherit" :to="{name:'Routines'}">
+        <div class="grid-item">
+          <v-icon size="80"  class="icon" color="#2c3e50">mdi-heart-multiple</v-icon>
           <div class="subtitulo">Mis Rutinas</div>
-        </router-link>
-      </div>
-      <div class="grid-item">
-        <v-icon size="80"  class="icon" color="#2c3e50">mdi-magnify</v-icon>
-        <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
+        </div>
+      </router-link>
+      <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
+        <div class="grid-item">
+          <v-icon size="80"  class="icon" color="#2c3e50">mdi-magnify</v-icon>
           <div class="subtitulo">Buscar</div>
-        </router-link>
-      </div>
-      <div class="grid-item">
-        <v-icon size="80" class="icon" color="#2c3e50">mdi-account-circle</v-icon>
-        <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
+        </div>
+      </router-link>
+      <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
+        <div class="grid-item">
+          <v-icon size="80" class="icon" color="#2c3e50">mdi-account-circle</v-icon>
           <div class="subtitulo">Mi Perfil</div>
-        </router-link>
-      </div>
-      <div class="grid-item">
-        <v-icon size="80"  class="icon" color="#2c3e50">mdi-help-circle-outline</v-icon>
-        <router-link style="text-decoration: none; color: inherit" :to="{name:'Help'}">
-          <div class="subtitulo">Ayuda</div>
-        </router-link>
-      </div>
+        </div>
+      </router-link>
+      <router-link style="text-decoration: none; color: inherit" :to="{name:'Help'}">
+        <div class="grid-item">
+          <v-icon size="80"  class="icon" color="#2c3e50">mdi-plus-circle-multiple</v-icon>
+          <div class="subtitulo">Crear</div>
+        </div>
+      </router-link>
     </div>
-    <div class="aux">
+    <div v-if="activeRoutine" class="aux">
       <div class="progBar">
         Progreso: 50%
       </div>
@@ -49,7 +49,7 @@ export default {
     return{
       result: null,
       username: null,
-      auxVar: 'true'
+      activeRoutine: false
     }
   },
   async created() {
@@ -81,9 +81,8 @@ export default {
       this.result = JSON.stringify(result, null, 2)
     },
     async getCurrentUser() {
-      await this.$getCurrentUser()
-      this.setResult(this.$user)
-      this.username = this.result.username;
+      const user = await this.$getCurrentUser()
+      this.username = user.firstName;
     },
   }
 }
