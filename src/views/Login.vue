@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-.aux{
+.aux {
   font-family: "Raleway", sans-serif;
   font-weight: bolder;
 }
@@ -83,6 +83,8 @@ export default {
   justify-content: center;
   background-image: url("../assets/FondoLogin.png");
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   margin: 0;
   padding: 0;
   height:100%;

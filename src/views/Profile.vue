@@ -24,6 +24,7 @@ export default {
     background-image: url("../assets/ProfileFondo.jpg");
     background-size: cover;
     height: 100%;
-    display: flow;
+    background-attachment: fixed;
+    background-position: center;
   }
 </style>

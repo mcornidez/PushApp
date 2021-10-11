@@ -72,9 +72,9 @@ export default {
   font-family: "Raleway", sans-serif;
   color: black;
   background-image: url("../assets/FondoHelp.jpg");
-  background-position: center;
   background-size: cover;
-  background-repeat: repeat-y;
+  background-attachment: fixed;
+  background-position: center;
   height:100%;
   vertical-align: middle;
 

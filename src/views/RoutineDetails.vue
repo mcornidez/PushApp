@@ -31,6 +31,8 @@ export default {
 
 <style scoped>
 .routine{
+  background-attachment: fixed;
+  background-position: center;
 }
 img {
   max-width: 600px;

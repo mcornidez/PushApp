@@ -66,6 +66,8 @@ export default {
   background-image: url("../assets/fondoHome.jpg");
   height: 100vh;
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 #mainBody{
