@@ -22,6 +22,16 @@ class UserApi {
     static async get(controller) {
         return Api.get(UserApi.getUrl('current'), true, controller)
     }
+    static async verify(credentials, controller){
+        return await Api.post(UserApi.getUrl('verify_email'), false, credentials, controller)
+    }
+}
+
+export class Validation{
+    constructor(mail, key) {
+        this.email = mail
+        this.code = key
+    }
 }
 
 class Credentials {

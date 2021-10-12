@@ -59,14 +59,23 @@ export default {
       $login: 'login',
       $logout: 'logout',
     }),
+    setResult(result){
+      this.result = JSON.stringify(result, null, 2)
+      alert(this.result);
+    },
     async login(){
-      //Este login funciona, faltaría ver tema de captar error si no puede logginear
-      var a = document.getElementById("username").value;
-      var b = document.getElementById("password").value;
-      const credentials = new Credentials(a, b);
-      await this.$login({credentials, rememberMe:false});
-      const redirectPath = this.$route.query.redirect || "/Home";
-      await this.$router.push(redirectPath);
+      try {
+        //Este login funciona, faltaría ver tema de captar error si no puede logginear
+        var a = document.getElementById("username").value;
+        var b = document.getElementById("password").value;
+        const credentials = new Credentials(a, b);
+        await this.$login({credentials, rememberMe: false});
+        const redirectPath = this.$route.query.redirect || "/Home";
+        await this.$router.push(redirectPath);
+      }
+      catch(e){
+        this.setResult(e.description);
+      }
     }
   }
 }
