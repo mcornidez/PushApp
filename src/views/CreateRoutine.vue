@@ -4,10 +4,10 @@
       <b>Crear Rutina</b>
     </div>
     <div class="form">
-      <input v-model="routineName" type="text" id="routineName" class="input" placeholder="Nombre rutina"/>
-      <input v-model="routineDescription" type="text" id="routineDescription" class="input" placeholder="Breve descripción"/>
-      <v-select :items="booleans" id="routinePrivacy" class="input" placeholder="¿Es pública?"/>
-      <v-select :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
+      <input type="text" id="routineName" class="input" placeholder="Nombre rutina"/>
+      <input type="text" id="routineDescription" class="input" placeholder="Breve descripción"/>
+      <v-select v-model="isPublic" :items="booleans" id="routinePrivacy" class="input" placeholder="¿Es pública?"/>
+      <v-select v-model="difficulty" :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
     </div>
     <v-btn class="btn" @click="create" :to="{name: 'Routines'}">
       <span class="mr-2">Crear Rutina</span>
@@ -26,12 +26,12 @@ export default {
   data() {
     return {
       result: null,
-      routineName: null,
-      routineDescription: null,
+      isPublic: null,
+      difficulty: null,
       exercises: [],
       booleans: [
-        "Si",
-        "No",
+        true,
+        false,
       ],
       difficulties: [
         "Rookie",
@@ -54,9 +54,7 @@ export default {
       try {
         let name = document.getElementById("routineName").value;
         let descr = document.getElementById("routineDescription").value;
-        // let privacy = document.getElementById("routinePrivacy").value;
-        // let difficulty = document.getElementById("routineDifficulty").value;
-        const routine = new Routine(name, descr, true, "rookie");
+        const routine = new Routine(name, descr, this.isPublic, this.difficulty.toLowerCase());
         this.result = await this.$createRoutine(routine);
         this.setResult(this.result);
         const redirectPath = this.$route.query.redirect || "/CreateRoutine";
