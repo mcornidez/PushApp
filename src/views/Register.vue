@@ -11,10 +11,12 @@
         <input v-model="surname" type="text" id="surname" class="input"/>
         <label for="mail">Ingrese su mail: </label>
         <input v-model="mail" type="text" id="mail" class="input"/>
-        <label for="user">Ingrese un usuario: </label>
-        <input v-model="user" type="text" id="user" class="input"/>
+        <label for="username">Ingrese un usuario: </label>
+        <input v-model="username" type="text" id="username" class="input"/>
         <label for="password">Ingrese una contraseña: </label>
         <input v-model="password" type="password" id="password" class="input"/>
+        <label for="gender">Indique su género (male/female): </label>
+        <input v-model="gender" type="text" id="gender" class="input"/>
         <button @click="register" class="btn">Registrarse</button>
         <br/>
         <label>¿Necesita ayuda? </label>
@@ -25,7 +27,8 @@
 </template>
 
 <script>
-import store from "@/store";
+import {Credentials2} from "../../api/user";
+import {mapActions} from "vuex";
 
 export default {
   name: "Register",
@@ -36,17 +39,35 @@ export default {
       mail: null,
       username: null,
       password: null,
+      dialog: false
     }
   },
   methods: {
-    register(){
-      //authenticate
-      store.name = this.name;
-      store.surname = this.surname;
-      store.mail = this.mail;
-      store.user = this.user;
-      store.password = this.password;
-      this.$router.push({name: 'Home'});
+    ...mapActions('security', {
+      $addUser: 'addUser'
+    }),
+    setResult(result){
+      this.result = JSON.stringify(result, null, 2)
+      alert(this.result);
+    },
+    async register(){
+      try {
+        let nombre = document.getElementById("name").value;
+        let apellido = document.getElementById("surname").value;
+        let mail = document.getElementById("mail").value;
+        let user = document.getElementById("username").value;
+        let pass = document.getElementById("password").value;
+        let gender = document.getElementById("gender").value;
+        const credentials = new Credentials2(user, pass, mail, nombre, apellido, gender);
+        //alert(JSON.stringify(credentials, null, 2));
+        //const credentials2 = new Credentials('Juan32', 'p', 'pytrjyitureiuyntreiynre@gm.com');
+        await this.$addUser(credentials);
+        const redirectPath = this.$route.query.redirect || "/";
+        await this.$router.push(redirectPath);
+      }
+      catch(e){
+        this.setResult(e)
+      }
     }
   }
 }

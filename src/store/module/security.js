@@ -41,6 +41,11 @@ export default {
             commit('setToken', null)
             Api.token = null
         },
+        async addUser({dispatch}, credentials){
+            alert(JSON.stringify(credentials, null,2));
+            dispatch('updateToken', { token: 0})
+            await UserApi.add(credentials);
+        },
         async login({dispatch}, {credentials, rememberMe}) {
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })

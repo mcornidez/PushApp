@@ -25,10 +25,24 @@ class UserApi {
 }
 
 class Credentials {
-    constructor(username, password, email, sec_email) {
+    constructor(username, password, email) {
         this.username = username
         this.password = password
         this.email = email
-        this.sec_email = sec_email
+    }
+}
+
+export class Credentials2{
+    constructor(username, password, email, firstName, lastName, gender) {
+        this.username = username
+        this.password = password
+        this.firstName = firstName
+        this.lastName = lastName
+        this.gender = gender
+        this.birthdate = 0
+        this.email = email
+        this.phone = '123456789' //No planeamos utilizar telefonos, pero es un parametro obligatorio en constructores
+        this.avatarUrl = '.'
+        this.metadata = null
     }
 }
