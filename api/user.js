@@ -36,9 +36,30 @@ export class Validation{
 
 class Credentials {
     constructor(username, password, email) {
+<<<<<<< HEAD
         this.username = username
         this.password = password
         this.email = email
+    }
+}
+
+export class Credentials2{
+    constructor(username, password, email, firstName, lastName, gender) {
+=======
+>>>>>>> 8ea5e7ba6216349281f4172592f284474959691d
+        this.username = username
+        this.password = password
+        this.firstName = firstName
+        this.lastName = lastName
+        this.gender = gender
+        this.birthdate = 0
+        this.email = email
+<<<<<<< HEAD
+        this.phone = '123456789' //No planeamos utilizar telefonos, pero es un parametro obligatorio en constructores
+        this.avatarUrl = '.'
+        this.metadata = null
+=======
+>>>>>>> 8ea5e7ba6216349281f4172592f284474959691d
     }
 }
 

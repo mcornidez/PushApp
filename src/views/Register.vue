@@ -29,6 +29,10 @@
 <script>
 import {Credentials2} from "../../api/user";
 import {mapActions} from "vuex";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8ea5e7ba6216349281f4172592f284474959691d
 export default {
   name: "Register",
   data(){
