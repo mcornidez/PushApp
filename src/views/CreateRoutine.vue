@@ -3,43 +3,13 @@
     <div id="title">
       <b>Crear Rutina</b>
     </div>
-    <v-btn class="btn" :to="{name: 'AddExercise'}">
-      <span class="mr-2">Añadir Ejercicio</span>
-    </v-btn>
-    <v-btn class="btn" :to="{name: 'MyExercises'}">
-      <span class="mr-2">Mis Ejercicios</span>
-    </v-btn>
     <div class="form">
-      <input v-model="rname" type="text" id="rname" class="input" placeholder="Nombre rutina"/>
-      <input v-model="rdescr" type="text" id="rdescr" class="input" placeholder="Breve descripción"/>
-      <v-select :items="booleans" id="rprivacy" class="input" placeholder="¿Es pública?"/>
-      <v-select :items="difficulties" id="rdifficulty" class="input" placeholder="Dificultad"/>
+      <input v-model="routineName" type="text" id="routineName" class="input" placeholder="Nombre rutina"/>
+      <input v-model="routineDescription" type="text" id="routineDescription" class="input" placeholder="Breve descripción"/>
+      <v-select :items="booleans" id="routinePrivacy" class="input" placeholder="¿Es pública?"/>
+      <v-select :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
     </div>
-    <div class="ex-box">
-      <b>Entrada en calor</b>
-    </div>
-    <div class="form">
-      <v-select @click=getAll :items="exercises" id="wname" class="input" placeholder="Ejercicio"/>
-      <input v-model="seconds" id="wsecs" type="number" min="0" class="input" placeholder="Segundos"/>
-      <input v-model="reps" id="wreps" type="number" min="0" class="input" placeholder="Repeticiones"/>
-    </div>
-    <div class="ex-box">
-      <b>Ejercitación</b>
-    </div>
-    <div class="form">
-      <v-select @click=getAll :items="exercises" id="ename" class="input" placeholder="Ejercicio"/>
-      <input v-model="esecs" id="esecs" type="number" min="0" class="input" placeholder="Segundos"/>
-      <input v-model="ereps" id="ereps" type="number" min="0" class="input" placeholder="Repeticiones"/>
-    </div>
-    <div class="ex-box">
-      <b>Enfriamiento</b>
-    </div>
-    <div class="form">
-      <v-select @click=getAll :items="exercises" id="cname" class="input" placeholder="Ejercicio"/>
-      <input v-model="csecs" id="csecs" type="number" min="0" class="input" placeholder="Segundos"/>
-      <input v-model="creps" id="creps" type="number" min="0" class="input" placeholder="Repeticiones"/>
-    </div>
-    <v-btn class="btn" :to="{name: 'Routines'}">
+    <v-btn class="btn" @click="create" :to="{name: 'Routines'}">
       <span class="mr-2">Crear Rutina</span>
     </v-btn>
   </div>
@@ -47,12 +17,17 @@
 
 <script>
 import {mapActions} from 'vuex'
+import {Routine} from "../../api/routines";
+
 
 
 export default {
   name: "CreateRoutine",
   data() {
     return {
+      result: null,
+      routineName: null,
+      routineDescription: null,
       exercises: [],
       booleans: [
         "Si",
@@ -64,21 +39,35 @@ export default {
         "Intermediate",
         "Advanced",
         "Expert"
-      ]
+      ],
     }
   },
   methods: {
-    ...mapActions('exercise', {
-      $getAll: 'getAll',
-      }),
-    async getAll(){
-      let aux = await this.$getAll();
-      this.exercises = aux.content.map(function(obj) {
-        return obj["name"];
-      });
+    ...mapActions('routines', {
+      $createRoutine: 'createRoutine',
+    }),
+    setResult(result) {
+      this.result = JSON.stringify(result, null, 2)
+      alert(this.result);
+    },
+    async create() {
+      try {
+        let name = document.getElementById("routineName").value;
+        let descr = document.getElementById("routineDescription").value;
+        // let privacy = document.getElementById("routinePrivacy").value;
+        // let difficulty = document.getElementById("routineDifficulty").value;
+        const routine = new Routine(name, descr, true, "rookie");
+        this.result = await this.$createRoutine(routine);
+        this.setResult(this.result);
+        const redirectPath = this.$route.query.redirect || "/CreateRoutine";
+        await this.$router.push(redirectPath);
+      } catch (e) {
+        this.setResult(e);
+      }
     }
   }
 }
+
 </script>
 
 <style scoped>
