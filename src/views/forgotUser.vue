@@ -5,9 +5,49 @@
       <div class="titulo">Introduzca su mail:</div>
       <input v-model="usuario" type="text" class="inputField"/>
       <br>
-      <v-btn dark color="blue" class="boton" @click="send">Enviar</v-btn>
-      <!-- aca faltaria poner un v-if (valida) que lo lleve a cambiar el usuario
-      y que si no, lo devuelva a la página de login con algun cartelito-->
+      <div class="text-center">
+        <v-dialog
+            v-model="dialog"
+            width="500"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+                color="blue"
+                dark
+                v-bind="attrs"
+                v-on="on"
+            >
+              Enviar
+            </v-btn>
+          </template>
+
+          <v-card>
+            <v-card-title class="text-h5 grey lighten-2">
+              Solicitud exitosa
+            </v-card-title>
+
+            <v-card-text class="font-weight-bold">
+              <div>
+                ¡Su solicitud fue procesada! Nos contactaremos a la brevedad.
+              </div>
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                  :to="{name: 'Login'}"
+              >
+                Volver
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </div>
   </div>
 </template>

@@ -42,7 +42,6 @@
 <script>
 import {Credentials} from "../../api/user";
 import {mapActions} from 'vuex'
-
 export default {
   name: 'App',
   components: {},
@@ -63,12 +62,9 @@ export default {
       this.result = JSON.stringify(result, null, 2)
       alert(this.result);
     },
-    clearResult() {
-      this.result = null
-    },
     async login(){
-      //Este login funciona, faltaría ver tema de captar error si no puede logginear
       try {
+        //Este login funciona, faltaría ver tema de captar error si no puede logginear
         var a = document.getElementById("username").value;
         var b = document.getElementById("password").value;
         const credentials = new Credentials(a, b);
@@ -77,7 +73,7 @@ export default {
         await this.$router.push(redirectPath);
       }
       catch(e){
-        this.setResult(e.description)
+        this.setResult(e.description);
       }
     }
   }
@@ -101,7 +97,6 @@ export default {
   padding: 0;
   height:100%;
 }
-
 .form{
   background-color: rgba(255,255,255, 0.7);
   height:100vh;
@@ -110,15 +105,11 @@ export default {
   /*justify-content: space-between;*/
   vertical-align: center;
 }
-
 input{
   width: 80%;
   position: center;
 }
-
 .row{
   height:100%;
 }
-
-
 </style>

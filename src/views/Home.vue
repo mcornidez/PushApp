@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div id="welcome">
-      <b>¡Bienvenido, {{username}}!</b>
+      <b>¡Bienvenido, {{$user.username}}!</b>
     </div>
     <!-- Inspirado en https://www.w3schools.com/css/css_grid.asp -->
     <div class="grid-container">

@@ -64,12 +64,25 @@ const routes = [
   {
     path:'/CurrentRoutine',
     name: 'CurrentRoutine',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/CurrentRoutine.vue')
+    component: () => import(/* webpackChunkName: "Register" */ '../views/CurrentRoutine.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path:'/CreateRoutine',
     name: 'CreateRoutine',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/CreateRoutine.vue')
+    component: () => import(/* webpackChunkName: "Register" */ '../views/CreateRoutine.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path:'/AddExercise',
+    name: 'AddExercise',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/AddExercise.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path:'/Verification',
+    name: 'Verification',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/Verification.vue')
   },
   {
     path: '*',

@@ -10,16 +10,16 @@
 </template>
 
 <script>
-  import NavBar from './components/NavBar';
-  export default {
-    name: 'App',
-    components: {
-      NavBar
-    },
-    data: () => ({
+import NavBar from './components/NavBar';
+export default {
+  name: 'App',
+  components: {
+    NavBar
+  },
+  data: () => ({
     //
-    }),
-  };
+  }),
+};
 </script>
 
 <style lang="scss">
@@ -30,7 +30,6 @@
   text-align: center;
   color: #2c3e50;
 }
-
 .input {
   background-color: white;
   opacity: 0.7;
@@ -38,13 +37,11 @@
   padding: 10px;
   margin-bottom: 20px;
 }
-
 .btn {
   background-color: #2c3e50;
   color: white;
   padding: 10px;
 }
-
 .test1{
   width:100%;
   background-color: red;

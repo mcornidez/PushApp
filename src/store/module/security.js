@@ -41,6 +41,15 @@ export default {
             commit('setToken', null)
             Api.token = null
         },
+        async addUser({dispatch}, credentials){
+            dispatch('updateToken', { token: 0})
+            await UserApi.add(credentials);
+        },
+        async verifyEmail({dispatch}, credentials){
+            dispatch('getCurrentUser'); //Esta a modo dummy esto, necesitamos entender porque llamad a aparametro
+            //estado cuando no lo declaramos (por sos el llamado sin sentido)
+            await UserApi.verify(credentials);
+        },
         async login({dispatch}, {credentials, rememberMe}) {
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })

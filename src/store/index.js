@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import security from './module/security';
+import sport from './module/sport';
+import exercise from './module/exercise';
 
 Vue.use(Vuex)
 
@@ -12,7 +14,9 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    security
+    security,
+    sport,
+    exercise
   }
 })
 
