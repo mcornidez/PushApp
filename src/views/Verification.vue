@@ -6,45 +6,15 @@
       <input type="text" class="inputField" id="email"/>
       <div class="titulo">Ingrese su código de verificación:</div>
       <input type="text" class="inputField" id="code"/>
-      <div class="text-center">
-        <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                color="blue"
-                dark
-                v-bind="attrs"
-                v-on="on"
-                @click="verify"
-            >
-              Enviar
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-card-title class="text-h5 grey lighten-2">
-              Solicitud exitosa
-            </v-card-title>
-
-            <v-card-text class="font-weight-bold">
-              <div>
-                ¡Su email ha sido confirmado! Será redirigido al sitio de inicio de sesión.
-              </div>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                  color="primary"
-                  text
-                  @click="dialog = false"
-                  :to="{name: 'Login'}"
-              >
-                Volver
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </div>
+      <br>
+      <v-btn
+          color="blue"
+          dark
+          v-bind="attrs"
+          v-on="on"
+          @click="verify">
+        Enviar
+      </v-btn>
     </div>
   </div>
 </template>
@@ -75,9 +45,11 @@ export default {
         var b = document.getElementById("code").value
         const verify = new Validation(a,b);
         await this.$verifyEmail(verify);
+        const redirectPath = this.$route.query.redirect || "/";
+        await this.$router.push(redirectPath);
       }
       catch(e){
-        this.setResult(e);
+        this.setResult(e.description);
       }
     }
   }

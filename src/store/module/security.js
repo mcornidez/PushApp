@@ -42,7 +42,6 @@ export default {
             Api.token = null
         },
         async addUser({dispatch}, credentials){
-            alert(JSON.stringify(credentials, null,2));
             dispatch('updateToken', { token: 0})
             await UserApi.add(credentials);
         },

@@ -49,6 +49,7 @@ export default {
     setResult(result){
       this.result = JSON.stringify(result, null, 2)
       alert(this.result);
+      location.reload()
     },
     async register(){
       try {
@@ -59,8 +60,6 @@ export default {
         let pass = document.getElementById("password").value;
         let gender = document.getElementById("gender").value;
         const credentials = new Credentials2(user, pass, mail, nombre, apellido, gender);
-        //alert(JSON.stringify(credentials, null, 2));
-        //const credentials2 = new Credentials('Juan32', 'p', 'pytrjyitureiuyntreiynre@gm.com');
         await this.$addUser(credentials);
         const redirectPath = this.$route.query.redirect || "/";
         await this.$router.push(redirectPath);
