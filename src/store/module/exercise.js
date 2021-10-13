@@ -3,7 +3,9 @@ import {ExerciseApi} from "../../../api/exercise";
 export default {
     namespaced: true,
     state: {
-        items: []
+        items: [],
+        currentExercise: null,
+        dummyVar: false
     },
     getters: {
         findIndex(state) {
@@ -24,6 +26,9 @@ export default {
         },
         replaceAll(state, exercises) {
             state.items = exercises
+        },
+        updateCurrentExercise(state, ex) {
+            state.currentExercise = ex
         }
     },
     actions: {
@@ -59,6 +64,13 @@ export default {
             const result = await ExerciseApi.getAll(controller)
             commit('replaceAll', result)
             return result
+        },
+        async setActiveExercise({commit}, ex){
+            commit('updateCurrentExercise', ex);
+        },
+        async modifyExercise({commit}, ex){
+            commit('dummyVar');
+            await ExerciseApi.modify(ex.id, ex);
         }
     },
 }

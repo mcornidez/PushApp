@@ -35,9 +35,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "help" */ '../views/Help.vue'),
   },
   {
-    path: '/routines/:id',
+    path: '/RoutineDetails',
     name: 'RoutineDetails',
-    component: () => import(/* webpackChunkName: "details" */ '../views/RoutineDetails.vue'),
+    component: () => import(/* webpackChunkName: "RoutineDetails" */ '../views/RoutineDetails.vue'),
     meta: { requiresAuth: true }
   },
   {
@@ -48,52 +48,59 @@ const routes = [
   {
     path: '/Profile',
     name: 'Profile',
-    component: () => import(/* webpackChunkName: "details" */ '../views/Profile.vue'),
+    component: () => import(/* webpackChunkName: "Profile" */ '../views/Profile.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/Exercises',
+    name: 'Exercises',
+    component: () => import(/* webpackChunkName: "Profile" */ '../views/Exercises.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/forgotPassword',
     name: 'ForgotPassword',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/forgotPassword.vue')
+    component: () => import(/* webpackChunkName: "ForgotPassword" */ '../views/forgotPassword.vue')
   },
   {
     path: '/forgotUser',
     name: 'ForgotUser',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/forgotUser.vue')
+    component: () => import(/* webpackChunkName: "ForgotUser" */ '../views/forgotUser.vue')
   },
   {
     path:'/CurrentRoutine',
     name: 'CurrentRoutine',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/CurrentRoutine.vue'),
+    component: () => import(/* webpackChunkName: "CurrentRoutine" */ '../views/CurrentRoutine.vue'),
     meta: { requiresAuth: true }
   },
   {
     path:'/CreateRoutine',
     name: 'CreateRoutine',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/CreateRoutine.vue'),
+    component: () => import(/* webpackChunkName: "CreateRoutine" */ '../views/CreateRoutine.vue'),
     meta: { requiresAuth: true }
   },
   {
     path:'/ModifyRoutine',
     name: 'ModifyRoutine',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/ModifyRoutine.vue'),
+    component: () => import(/* webpackChunkName: "ModifyRoutine" */ '../views/ModifyRoutine.vue'),
     //meta: { requiresAuth: true }
   },
   {
     path:'/AddExercise',
     name: 'AddExercise',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/AddExercise.vue'),
+    component: () => import(/* webpackChunkName: "AddExercise" */ '../views/AddExercise.vue'),
     meta: { requiresAuth: true }
   },
   {
-    path:'/Verification',
-    name: 'Verification',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/Verification.vue')
+    path:'/ModifyExercise',
+    name: 'ModifyExercise',
+    component: () => import(/* webpackChunkName: "ModifyExercise" */ '../views/ModifyExercise.vue'),
+    //meta: { requiresAuth: true }
   },
   {
     path:'/Verification',
     name: 'Verification',
-    component: () => import(/* webpackChunkName: "Register" */ '../views/Verification.vue')
+    component: () => import(/* webpackChunkName: "Verification" */ '../views/Verification.vue')
   },
   {
     path: '*',

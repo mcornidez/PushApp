@@ -34,7 +34,9 @@
       <div class="progBar">
         Progreso: 50%
       </div>
-      <v-btn :to="{name: 'CurrentRoutine'}" class="boton" fab dark small color="orange"><v-icon dark>mdi-arrow-right-thin-circle-outline</v-icon></v-btn>
+      <v-btn :to="{name: 'CurrentRoutine'}" class="boton" fab dark small color="orange">
+        <v-icon dark>mdi-arrow-right-thin-circle-outline</v-icon>
+      </v-btn>
     </div>
   </div>
 </template>

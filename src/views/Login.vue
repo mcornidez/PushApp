@@ -67,7 +67,7 @@ export default {
         var a = document.getElementById("username").value;
         var b = document.getElementById("password").value;
         const credentials = new Credentials(a, b);
-        await this.$login({credentials, rememberMe: false});
+        await this.$login({credentials, rememberMe: true});
         const redirectPath = this.$route.query.redirect || "/Home";
         await this.$router.push(redirectPath);
       }

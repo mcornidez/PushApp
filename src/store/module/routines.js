@@ -39,6 +39,9 @@ export default {
             commit('updateCurrentRoutine', result)
             return result
         },
+        async setActiveRoutine({commit}, routine){
+            commit('updateCurrentRoutine', routine);
+        },
         async modify({getters, commit}, routine) {
             const result = await RoutinesApi.modify(routine)
             const index = getters.findIndex(result)

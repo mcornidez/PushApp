@@ -4,19 +4,23 @@
       <div id="title">
         <b>Mis Rutinas</b>
       </div>
-      <v-btn class="btn" :to="{name: 'CreateRoutine'}">
-        <span class="mr-2">Añadir Nueva Rutina</span>
-      </v-btn>
+      <div class="buttons">
+        <v-btn class="btn" :to="{name: 'CreateRoutine'}">
+          <span class="mr-2 text--black">Añadir Nueva Rutina</span>
+        </v-btn>
+        <v-btn class="btn" :to="{name: 'Exercises'}">
+          <span class="mr-2 text--black">Mis ejercicios</span>
+        </v-btn>
+      </div>
       <div class="routines">
         <div class="grid-container">
           <div v-for="routine in routines" :key="routine.id" class="rutina">
-            <router-link @click="setCurrent(routine)" :to="{name: 'RoutineDetails', params:{id:routine.id}}" style="text-decoration: none; color: inherit;">
               <div class="grid-item">
                 <h2 style="text-decoration: underline">{{routine.name}}</h2>
                 <p>{{routine.detail}}</p>
                 <h3>Dificultad: {{routine.difficulty}}</h3>
+                <v-btn @click="setCurrent(routine)" :to="{name: 'RoutineDetails'}">Ir a rutina</v-btn>
               </div>
-            </router-link>
           </div>
         </div>
       </div>
@@ -44,7 +48,8 @@ export default {
   },
   methods: {
     ...mapActions('routines', {
-      $retrieveUserRoutines: 'retrieveUserRoutines'
+      $retrieveUserRoutines: 'retrieveUserRoutines',
+      $setActiveRoutine: 'setActiveRoutine'
     }),
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
@@ -53,8 +58,8 @@ export default {
       let res = await this.$retrieveUserRoutines(this.$user.id);
       this.routines = res.content;
     },
-    setCurrent(routine){
-      this.$currentRoutine = routine;
+    async setCurrent(routine){
+      await this.$setActiveRoutine(routine);
     }
   }
 }
@@ -84,6 +89,8 @@ export default {
 }
 #title{
   font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: bolder;
   font-size: xxx-large;
   padding-bottom: 0;
   margin: auto;
@@ -117,11 +124,21 @@ export default {
   overflow: hidden;
 }
 .btn {
-  margin-top: 15px;
-  background-color: white;
+  margin-right: 15px;
+  margin-left: 15px;
+  background-color: grey;
+  font-weight: bolder;
 }
 
 .body {
   padding-top: 20px;
+}
+.buttons{
+  margin:auto;
+  margin-top: 15px;
+  width: 80%;
+  justify-content: center;
+  align-content: center;
+  position: center;
 }
 </style>

@@ -11,8 +11,8 @@ class ExerciseApi {
         return await Api.post(ExerciseApi.getUrl(), true, exercise, controller)
     }
 
-    static async modify(exercise, controller) {
-        return await Api.put(ExerciseApi.getUrl(exercise.id), true, exercise, controller)
+    static async modify(id, exercise, controller) {
+        return await Api.put(ExerciseApi.getUrl(id), true, exercise, controller)
     }
 
     static async delete(id, controller) {
@@ -29,9 +29,10 @@ class ExerciseApi {
 }
 
 class Exercise {
-    constructor(name, detail, type) {
+    constructor(name, detail, type, id) {
         this.name = name;
         this.detail = detail;
         this.type = type;
+        this.id = id;
     }
 }
