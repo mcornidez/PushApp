@@ -1,40 +1,46 @@
 <template>
-  <div class="body">
-    <div class="banner">Sus rutinas</div>
+  <div id="background">
+    <div id="title">
+      <b>Mis Rutinas</b>
+    </div>
+    <v-btn @click="getAll">Cargar Rutinas</v-btn>
     <div class="routines">
-      <div v-for="routine in exploreRoutines" :key="routine.name" class="rutina">
-        <router-link :to="{name: 'RoutineDetails', params:{slug:routine.slug}}">
+      <div v-for="routine in routines" :key="routine.id" class="rutina">
+        <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}">
           <h2>{{routine.name}}</h2>
         </router-link>
-        <figure>
-          <router-link :to="routine.name">
-            <img :src='routine.image'/>
-          </router-link>
-        </figure>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import routines from "@/store/routines"
+import {mapActions} from "vuex";
 export default {
   name: 'Rutinas',
-  data(){
+  data() {
     return {
-      exploreRoutines: routines.exploreRoutines
+      routines: [],
+      routinesNames: [],
+      routinesDescr: [],
+      routinesDiff: [],
+    }
+  },
+  methods: {
+    ...mapActions('routines', {
+      $getAll: 'getAll',
+    }),
+    async getAll(){
+      let aux = await this.$getAll();
+      alert(JSON.stringify(aux, null, 2));
+      this.routines = aux.content;
     }
   }
 }
 </script>
 
 <style scoped>
-.banner{
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  font-size: 100px;
-}
+
 .routines{
   display: flex;
   flex-direction: row;
@@ -53,11 +59,26 @@ export default {
   border-color: black;
   border-width: thick;
 }
-img{
-  max-width: 200px;
-}
-.body{
-  background-color: aquamarine;
+
+#background{
+  background-image: url("../assets/FondoRutinas.jpeg");
+  background-size: cover;
   height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: "Raleway", sans-serif;
+  color: black;
+}
+#title{
+  font-family: "Raleway", sans-serif;
+  font-size: xxx-large;
+  padding-bottom: 0;
+  margin: auto;
+  vertical-align: middle;
+  border-radius: 15px;
+  width: 40vw;
+  background-color: lightblue;
+  position: center;
+  border: 3px solid black;
 }
 </style>

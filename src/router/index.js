@@ -74,6 +74,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path:'/ModifyRoutine',
+    name: 'ModifyRoutine',
+    component: () => import(/* webpackChunkName: "Register" */ '../views/ModifyRoutine.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path:'/AddExercise',
     name: 'AddExercise',
     component: () => import(/* webpackChunkName: "Register" */ '../views/AddExercise.vue'),

@@ -56,7 +56,6 @@ export default {
     ...mapActions('security', {
       $getCurrentUser: 'getCurrentUser',
       $login: 'login',
-      $logout: 'logout',
     }),
     setResult(result){
       this.result = JSON.stringify(result, null, 2)

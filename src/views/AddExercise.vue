@@ -49,11 +49,12 @@ export default {
         let descr = document.getElementById("edescr").value;
         const exercise = new Exercise(name, descr, this.type);
         await this.$create(exercise);
-        const redirectPath = this.$route.query.redirect || "/CreateRoutine";
+        const redirectPath = this.$route.query.redirect || "/ModifyRoutine";
         await this.$router.push(redirectPath);
       }
       catch(e){
-        this.setResult(e)
+        this.setResult(e);
+        this.clearResult();
       }
     }
   }
