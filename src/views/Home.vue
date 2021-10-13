@@ -17,13 +17,13 @@
           <div class="subtitulo">Buscar</div>
         </div>
       </router-link>
-      <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
+      <router-link style="text-decoration: none; color: inherit" :to="{name:'Profile'}">
         <div class="grid-item">
           <v-icon size="80" class="icon" color="#2c3e50">mdi-account-circle</v-icon>
           <div class="subtitulo">Mi Perfil</div>
         </div>
       </router-link>
-      <router-link style="text-decoration: none; color: inherit" :to="{name:'Help'}">
+      <router-link style="text-decoration: none; color: inherit" :to="{name:'CreateRoutine'}">
         <div class="grid-item">
           <v-icon size="80"  class="icon" color="#2c3e50">mdi-plus-circle-multiple</v-icon>
           <div class="subtitulo">Crear</div>
@@ -81,8 +81,13 @@ export default {
       this.result = JSON.stringify(result, null, 2)
     },
     async getCurrentUser() {
-      const user = await this.$getCurrentUser()
-      this.username = user.firstName;
+      try {
+        const user = await this.$getCurrentUser()
+        this.username = user.firstName;
+      }
+      catch(e){
+        this.setResult(e.description);
+      }
     },
   }
 }
@@ -162,7 +167,6 @@ export default {
   color: black;
   font-weight: bolder;
   font-size: xx-large;
-  justify-content: space-between;
 }
 
 .boton{
@@ -175,36 +179,4 @@ export default {
 .aux{
   display: inline-flex;
 }
-/*
-#mainBody{
-  background: rgba(255,255,255,0.6);
-  background-size: cover;
-  height: 100vh;
-  justify-content: space-between;
-}
-.card{
-  margin: 10px;
-  width: 40vw;
-  height:50vh;
-  position:center;
-  justify-content: center;
-  text-align:center;
-  font-family: "Raleway", sans-serif;
-  font-size: x-large;
-  background-color: red;
-}
-.card2{
-  width: 40vw;
-  height: 50vh;
-}
-.cards{
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  position:center;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}*/
-
 </style>

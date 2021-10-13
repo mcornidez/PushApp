@@ -7,7 +7,8 @@ export default {
     namespaced: true,
     state: {
         token: null,
-        user: null
+        user: null,
+        dummyVar: false
     },
     getters: {
         isLoggedIn(state) {
@@ -30,6 +31,9 @@ export default {
                 Api.token = token
             }
         },
+        updateDummyVar(){
+            this.dummyVar = !this.dummyVar;
+        },
         updateToken({commit}, {token, rememberMe}) {
             if (rememberMe)
                 localStorage.setItem(SECURITY_TOKEN_KEY, token)
@@ -42,11 +46,15 @@ export default {
             Api.token = null
         },
         async addUser({dispatch}, credentials){
-            dispatch('updateToken', { token: 0})
+            dispatch('updateDummyVar')
             await UserApi.add(credentials);
         },
+        async modifyUser({commit}, credentials){
+            const result = await UserApi.update(credentials);
+            commit('setUser', result);
+        },
         async verifyEmail({dispatch}, credentials){
-            dispatch('getCurrentUser'); //Esta a modo dummy esto, necesitamos entender porque llamad a aparametro
+            dispatch('updateDummyVar'); //Esta a modo dummy esto, necesitamos entender porque llamad a aparametro
             //estado cuando no lo declaramos (por sos el llamado sin sentido)
             await UserApi.verify(credentials);
         },

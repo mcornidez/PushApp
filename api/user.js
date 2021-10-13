@@ -6,24 +6,23 @@ class UserApi {
     static getUrl(slug) {
         return `${Api.baseUrl}/users${ slug ? `/${slug}` : ''}`
     }
-
     static async add(credentials, controller) {
         return await Api.post(UserApi.getUrl(), false, credentials, controller)
     }
-
     static async login(credentials, controller) {
         return await Api.post(UserApi.getUrl('login'), false, credentials, controller)
     }
-
     static async logout(controller) {
         await Api.post(UserApi.getUrl('logout'), true, controller)
     }
-
     static async get(controller) {
         return Api.get(UserApi.getUrl('current'), true, controller)
     }
     static async verify(credentials, controller){
         return await Api.post(UserApi.getUrl('verify_email'), false, credentials, controller)
+    }
+    static async update(credentials, controller){
+        return await Api.put(UserApi.getUrl('current'), true, credentials, controller)
     }
 }
 

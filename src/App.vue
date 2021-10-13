@@ -24,7 +24,8 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
