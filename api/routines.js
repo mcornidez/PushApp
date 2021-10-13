@@ -27,7 +27,7 @@ class RoutinesApi {
 }
 class Routine {
     constructor(name, detail, isPublic, difficulty) {
-        this.name =  name;
+        this.name = name;
         this.detail = detail;
         this.isPublic = isPublic;
         this.difficulty = difficulty;

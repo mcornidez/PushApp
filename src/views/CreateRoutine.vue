@@ -18,6 +18,7 @@
 <script>
 import {mapActions} from 'vuex'
 import {Routine} from "../../api/routines";
+
 export default {
   name: "CreateRoutine",
   data() {
@@ -64,6 +65,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
