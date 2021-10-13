@@ -64,40 +64,33 @@
       class="btn">
     <v-icon>mdi-account-outline</v-icon>
   </v-btn>
-  <button @click="logout" class="btn">
+  <v-btn :to="{name: 'Login'}" class="btn" :disabled="!canOperate" @click="logout">
     <v-icon>mdi-logout-variant</v-icon>
-  </button>
+  </v-btn>
 </div>
 </div>
 </template>
 
 <script>
-import {mapActions, mapState, mapGetters} from 'vuex'
-//import {Credentials} from "../api/user";
-//import {Sport} from "../api/sport";
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "NavBar.vue",
   computed: {
-    ...mapState('security', {
-      $user: state => state.user,
-    }),
     ...mapGetters('security', {
       $isLoggedIn: 'isLoggedIn'
     }),
     canOperate() {
-      return true
-      //this.$isLoggedIn
-    },
-    methods: {
-      ...mapActions('security', {
-        $getCurrentUser: 'getCurrentUser',
-        $logout: 'logout',
-      }),
-      async logout() {
-        await this.$logout()
-        this.clearResult()
-      },
+      return this.$isLoggedIn;
+    }
+  },
+  methods: {
+    ...mapActions('security', {
+      $logout: 'logout',
+    }),
+    async logout() {
+      await this.$logout();
+      this.clearResult();
     },
   }
 }
