@@ -1,54 +1,87 @@
 <template>
-  <section class="routine">
-    <h1>Routine: {{routine.name}}</h1>
-    <div class="routine-details">
-      <img :src='routine.image' :alt="routine.name"/>
-      <p>{{routine.description}}</p>
+  <div id="background">
+    <div class="body">
+      <div id="title">
+        <b>Mi Rutinas</b>
+      </div>
+      <div class="routines">
+        <h1>Routine: {{$currentRoutine.name}}</h1>
+        <div class="routine-details">
+          <p>{{$currentRoutine.detail}}</p>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
-import routines from "@/store/routines"
+
+import {mapState} from "vuex";
 
 export default {
   name: "RoutineDetails",
   data(){
-    return{
-      routineId: this.$route.params.id,
-      routineSlug: this.$route.params.slug
-    }
   },
   computed: {
-    routine(){
-      return routines.exploreRoutines.find(
-          routine => routine.slug === this.routineSlug
-      )
-    }
-  }
+    ...mapState('routines', {
+      $currentRoutine: state => state.currentRoutine,
+    })
+  },
 }
 </script>
 
 <style scoped>
-.routine{
-  background-attachment: fixed;
-  background-position: center;
-}
-img {
-  max-width: 600px;
-  height: auto;
-  width: 100%;
-  max-height: 400px;
-}
-
-.routine-details {
+.routines{
   display: flex;
+  flex-direction: row;
+  background-size: cover;
   justify-content: space-between;
 }
 
-p {
-  margin: 0 40px;
-  font-size: 20px;
-  text-align: justify;
+#background{
+  background-image: url("../assets/FondoRutinas.jpeg");
+  background-size: cover;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: "Raleway", sans-serif;
+  color: black;
+}
+#title{
+  font-family: "Raleway", sans-serif;
+  font-size: xxx-large;
+  padding-bottom: 0;
+  margin: auto;
+  vertical-align: middle;
+  border-radius: 15px;
+  width: 40vw;
+  background-color: lightblue;
+  position: center;
+  border: 3px solid black;
+}
+
+.grid-container {
+  display: inline-grid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  position: center;
+  height: 60%;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+.grid-item {
+  background-color: rgba(232,232,232,0.8);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+  width: auto;
+  text-align: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.body {
+  padding-top: 20px;
 }
 </style>

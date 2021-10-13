@@ -65,8 +65,9 @@ export default {
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })
         },
-        async logout({commit}) {
+        async logout({dispatch, commit}) {
             await UserApi.logout()
+            dispatch('removeToken')
             commit("clearUser")
         },
         async getCurrentUser({state, commit}) {

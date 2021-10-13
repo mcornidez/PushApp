@@ -1,21 +1,20 @@
 <template>
   <div id="background">
-    <div id="title">
-      <b>Explorar Rutinas</b>
-    </div>
-    <v-btn class="btn" :to="{name: 'CreateRoutine'}">
-      <span class="mr-2">Añadir Nueva Rutina</span>
-    </v-btn>
-    <div class="routines">
-      <div class="grid-container">
-        <div v-for="routine in routines" :key="routine.id" class="rutina">
-          <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}" style="text-decoration: none; color: inherit;">
-            <div class="grid-item">
-              <h2 style="text-decoration: underline">{{routine.name}}</h2>
-              <p>{{routine.detail}}</p>
-              <h3>Dificultad: {{routine.difficulty}}</h3>
-            </div>
-          </router-link>
+    <div class="body">
+      <div id="title">
+        <b>Explorar Rutinas</b>
+      </div>
+      <div class="routines">
+        <div class="grid-container">
+          <div v-for="routine in routines" :key="routine.id" class="rutina">
+            <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}" style="text-decoration: none; color: inherit;">
+              <div class="grid-item">
+                <h2 style="text-decoration: underline">{{routine.name}}</h2>
+                <p>{{routine.detail}}</p>
+                <h3>Dificultad: {{routine.difficulty}}</h3>
+              </div>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -73,6 +72,7 @@ export default {
   font-size: xxx-large;
   padding-bottom: 0;
   margin: auto;
+  margin-bottom: 30px;
   vertical-align: middle;
   border-radius: 15px;
   width: 40vw;
@@ -102,9 +102,8 @@ export default {
   justify-content: center;
   overflow: hidden;
 }
-.btn {
-  margin-top: 15px;
-  background-color: white;
+.body {
+  padding-top: 20px;
 }
 
 </style>

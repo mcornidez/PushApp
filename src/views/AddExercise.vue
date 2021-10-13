@@ -1,16 +1,18 @@
 <template>
   <div id="background">
-    <div id="title">
-      <b>Añadir Ejercicio</b>
-    </div>
-    <div class="form">
-      <input type="text" id="ename" class="input" placeholder="Nombre ejercicio"/>
-      <input type="text" id="edescr" class="input" placeholder="Breve descripción"/>
-      <v-select v-model="type" :items="types" id="etype" class="input" placeholder="Tipo de ejercicio"/>
-    </div>
-    <v-btn class="btn" @click="create">
-      <span class="mr-2">Añadir Ejercicio</span>
-    </v-btn>
+    <div class="body">
+      <div id="title">
+        <b>Añadir Ejercicio</b>
+      </div>
+      <div class="form">
+        <input type="text" id="ename" class="input" placeholder="Nombre ejercicio"/>
+        <input type="text" id="edescr" class="input" placeholder="Breve descripción"/>
+        <v-select v-model="type" :items="types" id="etype" class="input" placeholder="Tipo de ejercicio"/>
+      </div>
+      <v-btn class="btn" @click="create">
+        <span class="mr-2">Añadir Ejercicio</span>
+      </v-btn>
+      </div>
   </div>
 </template>
 
@@ -97,5 +99,9 @@ export default {
   color: black;
   opacity: 90%;
   font-weight: bold;
+}
+
+.body {
+  padding-top: 20px;
 }
 </style>

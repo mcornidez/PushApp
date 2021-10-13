@@ -32,7 +32,7 @@
           <div class="item">
             <div class="pl-5 mt-6" v-if="!changeGender"><b>Género: </b>{{ $user.gender }}</div>
             <div class="width:100%; ml-5" v-else>
-              <v-text-field class="mt-6" outlined label="Género: " v-model="gender" id="gender"></v-text-field>
+              <v-select v-model="gender" :items="genders" id="gender" class="mt-6" placeholder="Género"/>
             </div>
             <button @click="modifyGender" class="btn pa-0 mt-6">
               <v-icon left>mdi-pencil-box-outline</v-icon>
@@ -63,6 +63,8 @@ export default {
       changeUser: false,
       changeEmail: false,
       changeGender: false,
+      genders: ["male", "female", "other"],
+      gender: null
     }
   },
 
@@ -125,15 +127,14 @@ export default {
       try {
         let nombre = this.changeName ? document.getElementById("name").value : this.username;
         let apellido = this.changeLast ? document.getElementById("surname").value : this.lastname;
-        let gender = this.changeGender ? document.getElementById("gender").value : this.gender;
-        const credentials = new Credentials2(this.username, this.password, this.mail, nombre, apellido, gender);
+        const credentials = new Credentials2(this.username, this.password, this.mail, nombre, apellido, this.gender);
         await this.$modifyUser(credentials);
         this.changeGender = this.changeName = this.changeLast = false;
         const redirectPath = this.$route.query.redirect || "/Profile";
         await this.$router.push(redirectPath);
       }
       catch(e){
-        this.setResult(e.description);
+        this.setResult(e);
       }
     }
   }

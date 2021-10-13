@@ -1,44 +1,69 @@
 <template>
   <div id="background">
-    <div id="title">
-      <b>Modificar Rutina</b>
+    <div class="body">
+      <div id="title">
+        <b>Modificar Rutina</b>
+      </div>
+      <div class="ex-box">
+        <b>{{ $currentRoutine.name }}</b>
+      </div>
+      <div class="form">
+        <input type="text" id="cycleName" class="input" placeholder="Nombre ciclo"/>
+        <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
+        <input type="text" id="repetitions" class="input" placeholder="Repeticiones"/>
+        <v-select v-model="cycleType" :items="cycleTypes" id="cycleType" class="input" placeholder="Tipo de circuito"/>
+      </div>
+      <v-btn class="btn" @click="createRoutineCycle">
+        <span class="mr-2">Crear circuito</span>
+      </v-btn>
+      <div class="form">
+        <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" id="exerciseName" class="input" placeholder="Ejercicio"/>
+        <input v-model="seconds" id="wsecs" type="text" min="0" class="input" placeholder="Segundos"/>
+        <input v-model="reps" id="wreps" type="text" min="0" class="input" placeholder="Repeticiones"/>
+      </div>
+      <v-btn class="btn" @click=addExerciseToCycle>
+        <span class="mr-2">Añadir Ejercicio</span>
+      </v-btn>
+      <v-btn class="btn" :to="{name: 'MyExercises'}">
+        <span class="mr-2">Mis Ejercicios</span>
+      </v-btn>
+      <v-btn class="btn" :to="{name: 'Routines'}">
+        <span class="mr-2">Guardar</span>
+      </v-btn>
     </div>
-    <v-btn class="btn" :to="{name: 'AddExercise'}">
-      <span class="mr-2">Añadir Ejercicio</span>
-    </v-btn>
-    <v-btn class="btn" :to="{name: 'MyExercises'}">
-      <span class="mr-2">Mis Ejercicios</span>
-    </v-btn>
-    <div class="ex-box">
-      <b>{{ $currentRoutine.name }}</b>
-    </div>
-    <v-btn class="btn" @click="createRoutineCycle">
-      <span class="mr-2">Crear circuito</span>
-    </v-btn>
-    <div class="form">
-      <v-select @click=getAll :items="exercises" id="wname" class="input" placeholder="Ejercicio"/>
-      <input v-model="seconds" id="wsecs" type="number" min="0" class="input" placeholder="Segundos"/>
-      <input v-model="reps" id="wreps" type="number" min="0" class="input" placeholder="Repeticiones"/>
-    </div>
-    <v-btn class="btn" :to="{name: 'Routines'}">
-      <span class="mr-2">Guardar</span>
-    </v-btn>
   </div>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex';
 import {RoutinesCycle} from '../../api/routinesCycle'
+import {CycleExercises} from "../../api/cyclesExercises";
+
 export default {
   name: "ModifyRoutine",
   data() {
     return {
-      exercises: []
+      exercises: [],
+      exercisesNames: [],
+      exerciseSelected: null,
+      seconds: null,
+      reps: null,
+      cycleOrder: 0,
+      exerciseOrder: 0,
+      cycleType: null,
+      cycleTypes: [
+        "warmup",
+        "exercise",
+        "cooldown"
+      ],
     }
   },
   computed: {
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
+    }),
+    ...mapState('routinesCycle', {
+      $currentRoutineCycle: state => state.currentRoutineCycle,
     })
   },
   methods: {
@@ -48,6 +73,9 @@ export default {
     ...mapActions('routinesCycle', {
       $createRoutineCycle: 'createRoutineCycle',
     }),
+    ...mapActions('cyclesExercises', {
+      $addCycleExercise: 'addCycleExercise',
+    }),
     setResult(result) {
       this.result = JSON.stringify(result, null, 2)
       alert(this.result);
@@ -56,15 +84,33 @@ export default {
       this.result = null
     },
     async getAll(){
-      let aux = await this.$getAll();
-      this.exercises = aux.content.map(function(obj) {
+      this.exercises = await this.$getAll();
+      this.getExercisesNames(this.exercises);
+    },
+    getExercisesNames(exercises) {
+      this.exercisesNames = exercises.content.map(function(obj) {
         return obj["name"];
       });
     },
     async createRoutineCycle() {
       try{
-        const routineCycle = new RoutinesCycle("Entrada en calor", "Para entrar en calor", "warmup", 1, 2, this.$currentRoutine.id);
+        this.cycleOrder++;
+        this.exerciseOrder = 0;
+        let name = document.getElementById("cycleName").value;
+        let descr = document.getElementById("cycleDescription").value;
+        let reps = document.getElementById("repetitions").value
+        const routineCycle = new RoutinesCycle(name, descr, this.cycleType, this.cycleOrder, parseInt(reps), this.$currentRoutine.id);
         await this.$createRoutineCycle(routineCycle);
+      } catch(e) {
+        this.setResult(e);
+      }
+    },
+    async addExerciseToCycle() {
+      try {
+        this.exerciseOrder++;
+        const exerciseId = this.exercises.content.find(item => item.name === this.exerciseSelected).id;
+        const cycleExercise = new CycleExercises(this.exerciseOrder, parseInt(this.seconds), parseInt(this.reps), this.$currentRoutineCycle.id, exerciseId);
+        await this.$addCycleExercise(cycleExercise);
       } catch(e) {
         this.setResult(e);
       }
@@ -122,5 +168,9 @@ export default {
   color: black;
   opacity: 90%;
   font-weight: bold;
+}
+
+.body {
+  padding-top: 20px;
 }
 </style>

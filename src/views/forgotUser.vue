@@ -1,52 +1,54 @@
 <template>
   <div class="mainBody">
-    <h1 id="MainTitle">¿Olvidaste tu usuario?</h1>
-    <div class="form">
-      <div class="titulo">Introduzca su mail:</div>
-      <input v-model="usuario" type="text" class="inputField"/>
-      <br>
-      <div class="text-center">
-        <v-dialog
-            v-model="dialog"
-            width="500"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                color="blue"
-                dark
-                v-bind="attrs"
-                v-on="on"
-            >
-              Enviar
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-card-title class="text-h5 grey lighten-2">
-              Solicitud exitosa
-            </v-card-title>
-
-            <v-card-text class="font-weight-bold">
-              <div>
-                ¡Su solicitud fue procesada! Nos contactaremos a la brevedad.
-              </div>
-            </v-card-text>
-
-            <v-divider></v-divider>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
+    <div class="body">
+      <h1 id="MainTitle">¿Olvidaste tu usuario?</h1>
+      <div class="form">
+        <div class="titulo">Introduzca su mail:</div>
+        <input v-model="usuario" type="text" class="inputField"/>
+        <br>
+        <div class="text-center">
+          <v-dialog
+              v-model="dialog"
+              width="500"
+          >
+            <template v-slot:activator="{ on, attrs }">
               <v-btn
-                  color="primary"
-                  text
-                  @click="dialog = false"
-                  :to="{name: 'Login'}"
+                  color="blue"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
               >
-                Volver
+                Enviar
               </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+            </template>
+
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Solicitud exitosa
+              </v-card-title>
+
+              <v-card-text class="font-weight-bold">
+                <div>
+                  ¡Su solicitud fue procesada! Nos contactaremos a la brevedad.
+                </div>
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="primary"
+                    text
+                    @click="dialog = false"
+                    :to="{name: 'Login'}"
+                >
+                  Volver
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </div>
     </div>
   </div>
@@ -111,6 +113,10 @@ h1{
 }
 .boton{
   font-weight: bolder;
+  padding-top: 20px;
+}
+
+.body {
   padding-top: 20px;
 }
 </style>

@@ -1,21 +1,23 @@
 <template>
   <div id="background">
-    <div id="title">
-      <b>Mis Rutinas</b>
-    </div>
-    <v-btn class="btn" :to="{name: 'CreateRoutine'}">
-      <span class="mr-2">Añadir Nueva Rutina</span>
-    </v-btn>
-    <div class="routines">
-      <div class="grid-container">
-        <div v-for="routine in routines" :key="routine.id" class="rutina">
-          <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}" style="text-decoration: none; color: inherit;">
-            <div class="grid-item">
-              <h2 style="text-decoration: underline">{{routine.name}}</h2>
-              <p>{{routine.detail}}</p>
-              <h3>Dificultad: {{routine.difficulty}}</h3>
-            </div>
-          </router-link>
+    <div class="body">
+      <div id="title">
+        <b>Mis Rutinas</b>
+      </div>
+      <v-btn class="btn" :to="{name: 'CreateRoutine'}">
+        <span class="mr-2">Añadir Nueva Rutina</span>
+      </v-btn>
+      <div class="routines">
+        <div class="grid-container">
+          <div v-for="routine in routines" :key="routine.id" class="rutina">
+            <router-link @click="setCurrent(routine)" :to="{name: 'RoutineDetails', params:{id:routine.id}}" style="text-decoration: none; color: inherit;">
+              <div class="grid-item">
+                <h2 style="text-decoration: underline">{{routine.name}}</h2>
+                <p>{{routine.detail}}</p>
+                <h3>Dificultad: {{routine.difficulty}}</h3>
+              </div>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -29,11 +31,10 @@ export default {
   data() {
     return {
       routines: [],
-      id: null
+      id: null,
     }
   },
   async created(){
-    //await this.getCurrentUser();
     await this.getAll();
   },
   computed: {
@@ -45,13 +46,16 @@ export default {
     ...mapActions('routines', {
       $retrieveUserRoutines: 'retrieveUserRoutines'
     }),
-    ...mapActions('security',{
-      $getCurrentUser: 'getCurrentUser'
+    ...mapState('routines', {
+      $currentRoutine: state => state.currentRoutine,
     }),
     async getAll(){
       let res = await this.$retrieveUserRoutines(this.$user.id);
       this.routines = res.content;
     },
+    setCurrent(routine){
+      this.$currentRoutine = routine;
+    }
   }
 }
 </script>
@@ -117,4 +121,7 @@ export default {
   background-color: white;
 }
 
+.body {
+  padding-top: 20px;
+}
 </style>

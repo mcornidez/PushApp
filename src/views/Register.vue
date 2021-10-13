@@ -15,8 +15,7 @@
         <input v-model="username" type="text" id="username" class="input"/>
         <label for="password">Ingrese una contraseña: </label>
         <input v-model="password" type="password" id="password" class="input"/>
-        <label for="gender">Indique su género (male/female): </label>
-        <input v-model="gender" type="text" id="gender" class="input"/>
+        <v-select v-model="gender" :items="genders" id="gender" class="input" placeholder="Género"/>
         <button @click="register" class="btn">Registrarse</button>
         <br/>
         <label>¿Necesita ayuda? </label>
@@ -38,7 +37,9 @@ export default {
       mail: null,
       username: null,
       password: null,
-      dialog: false
+      dialog: false,
+      genders: ["male", "female", "other"],
+      gender: null
     }
   },
   methods: {
@@ -57,8 +58,7 @@ export default {
         let mail = document.getElementById("mail").value;
         let user = document.getElementById("username").value;
         let pass = document.getElementById("password").value;
-        let gender = document.getElementById("gender").value;
-        const credentials = new Credentials2(user, pass, mail, nombre, apellido, gender);
+        const credentials = new Credentials2(user, pass, mail, nombre, apellido, this.gender);
         await this.$addUser(credentials);
         const redirectPath = this.$route.query.redirect || "/";
         await this.$router.push(redirectPath);

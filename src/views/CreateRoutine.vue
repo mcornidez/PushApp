@@ -1,17 +1,19 @@
 <template>
   <div id="background">
-    <div id="title">
-      <b>Crear Rutina</b>
+    <div class="body">
+      <div id="title">
+        <b>Crear Rutina</b>
+      </div>
+      <div class="form">
+        <input type="text" id="routineName" class="input" placeholder="Nombre rutina"/>
+        <input type="text" id="routineDescription" class="input" placeholder="Breve descripción"/>
+        <v-select v-model="isPublic" :items="booleans" id="routinePrivacy" class="input" placeholder="¿Es pública?"/>
+        <v-select v-model="difficulty" :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
+      </div>
+      <v-btn class="btn" @click="create">
+        <span class="mr-2">Crear Rutina</span>
+      </v-btn>
     </div>
-    <div class="form">
-      <input type="text" id="routineName" class="input" placeholder="Nombre rutina"/>
-      <input type="text" id="routineDescription" class="input" placeholder="Breve descripción"/>
-      <v-select v-model="isPublic" :items="booleans" id="routinePrivacy" class="input" placeholder="¿Es pública?"/>
-      <v-select v-model="difficulty" :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
-    </div>
-    <v-btn class="btn" @click="create">
-      <span class="mr-2">Crear Rutina</span>
-    </v-btn>
   </div>
 </template>
 
@@ -122,5 +124,9 @@ export default {
   color: black;
   opacity: 90%;
   font-weight: bold;
+}
+
+.body {
+  padding-top: 20px;
 }
 </style>

@@ -35,7 +35,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "help" */ '../views/Help.vue'),
   },
   {
-    path: '/routines/:slug',
+    path: '/routines/:id',
     name: 'RoutineDetails',
     component: () => import(/* webpackChunkName: "details" */ '../views/RoutineDetails.vue'),
     meta: { requiresAuth: true }
