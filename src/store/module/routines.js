@@ -3,7 +3,8 @@ import {RoutinesApi} from "../../../api/routines";
 export default {
     namespaced: true,
     state: {
-        routines: []
+        routines: [],
+        currentRoutine: null
     },
     getters: {
         findIndex(state) {
@@ -24,6 +25,9 @@ export default {
         },
         replaceAll(state, sports) {
             state.items = sports
+        },
+        updateCurrentRoutine(state, currentRoutine) {
+            state.currentRoutine = currentRoutine
         }
     },
     actions: {
@@ -31,6 +35,7 @@ export default {
             const result = await RoutinesApi.add(routine)
             if (!getters.findIndex(result))
                 commit('push', result)
+            commit('updateCurrentRoutine', result)
             return result
         },
         async modify({getters, commit}, routine) {

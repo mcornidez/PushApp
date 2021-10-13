@@ -77,7 +77,7 @@ const routes = [
     path:'/ModifyRoutine',
     name: 'ModifyRoutine',
     component: () => import(/* webpackChunkName: "Register" */ '../views/ModifyRoutine.vue'),
-    meta: { requiresAuth: true }
+    //meta: { requiresAuth: true }
   },
   {
     path:'/AddExercise',

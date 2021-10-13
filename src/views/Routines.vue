@@ -3,7 +3,6 @@
     <div id="title">
       <b>Mis Rutinas</b>
     </div>
-    <v-btn @click="getAll">Cargar Rutinas</v-btn>
     <div class="routines">
       <div v-for="routine in routines" :key="routine.id" class="rutina">
         <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}">
@@ -21,10 +20,10 @@ export default {
   data() {
     return {
       routines: [],
-      routinesNames: [],
-      routinesDescr: [],
-      routinesDiff: [],
     }
+  },
+  async created(){
+    await this.getAll();
   },
   methods: {
     ...mapActions('routines', {
@@ -32,7 +31,6 @@ export default {
     }),
     async getAll(){
       let aux = await this.$getAll();
-      alert(JSON.stringify(aux, null, 2));
       this.routines = aux.content;
     }
   }

@@ -29,8 +29,6 @@
 <script>
 import {mapActions, mapState} from 'vuex';
 import {RoutinesCycle} from '../../api/routinesCycle'
-
-
 export default {
   name: "ModifyRoutine",
   data() {
@@ -70,7 +68,6 @@ export default {
       } catch(e) {
         this.setResult(e);
       }
-
     }
   }
 }
@@ -98,12 +95,10 @@ export default {
   position: center;
   border: 3px solid black;
 }
-
 .btn {
   margin: 15px;
   background-color: white;
 }
-
 .ex-box{
   font-family: "Raleway", sans-serif;
   font-size: x-large;
@@ -123,7 +118,6 @@ export default {
   display :flex;
   width: 50%;
 }
-
 .input {
   color: black;
   opacity: 90%;
