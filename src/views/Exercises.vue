@@ -5,7 +5,7 @@
       <b>Mis Ejercicios</b>
     </div>
     <div class="buttons">
-      <v-btn class="btn" :to="{name: 'CreateRoutine'}">
+      <v-btn class="btn" :to="{name: 'AddExercise'}">
         <span class="mr-2 text--black">Añadir ejercicio</span>
       </v-btn>
     </div>
@@ -18,6 +18,10 @@
             <div class="editSpan">
               <v-btn class="btn" @click="setCurrent(exercise)" :to="{name: 'ModifyExercise'}">Editar</v-btn>
               <v-icon color="darkgrey" >mdi-square-edit-outline</v-icon>
+            </div>
+            <div class="eraseSpan mt-4">
+              <v-btn class="btn" @click="eraseCurrent(exercise)">Borrar</v-btn>
+              <v-icon color="darkgrey" >mdi-trash-can-outline</v-icon>
             </div>
           </div>
         </div>
@@ -33,8 +37,8 @@ export default {
   name: 'Exercises',
   data() {
     return {
-      exercises: [],
       id: null,
+      exercises: []
     }
   },
   async created(){
@@ -44,14 +48,16 @@ export default {
     ...mapState('security', {
       $user: state => state.user,
     }),
+    ...mapState('exercise', {
+      $currentExercise: state => state.currentExercise,
+      $exercises: state => state.items
+    }),
   },
   methods: {
     ...mapActions('exercise', {
       $getAll: 'getAll',
-      $setActiveExercise: 'setActiveExercise'
-    }),
-    ...mapState('exercise', {
-      $currentExercise: state => state.currentExercise,
+      $setActiveExercise: 'setActiveExercise',
+      $delete: 'delete'
     }),
     async getAll(){
       let res = await this.$getAll();
@@ -59,6 +65,10 @@ export default {
     },
     async setCurrent(ex){
       await this.$setActiveExercise(ex);
+    },
+    async eraseCurrent(ex){
+      await this.$delete(ex);
+      await this.getAll();
     }
   }
 }
@@ -100,9 +110,6 @@ export default {
   border: 3px solid black;
 }
 
-.editSpan{
-  display: inline-flex;
-}
 
 .grid-container {
   display: inline-grid;

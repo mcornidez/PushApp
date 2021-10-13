@@ -1,5 +1,6 @@
 <template>
   <div id="background">
+    <GoBack/>
     <div class="body">
       <div id="title">
         <b>Añadir Ejercicio</b>
@@ -51,7 +52,7 @@ export default {
         let descr = document.getElementById("edescr").value;
         const exercise = new Exercise(name, descr, this.type);
         await this.$create(exercise);
-        const redirectPath = this.$route.query.redirect || "/ModifyRoutine";
+        const redirectPath = this.$route.query.redirect || "/AddExercise";
         await this.$router.push(redirectPath);
       }
       catch(e){

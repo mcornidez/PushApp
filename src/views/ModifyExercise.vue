@@ -12,6 +12,7 @@
       <v-btn class="btn" @click="modify">
         <span class="mr-2">Modificar ejercicio</span>
       </v-btn>
+      <br>
     </div>
   </div>
 </template>

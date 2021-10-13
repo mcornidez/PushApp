@@ -5,6 +5,7 @@ export default {
     state: {
         items: [],
         currentExercise: null,
+        exercises: [],
         dummyVar: false
     },
     getters: {
