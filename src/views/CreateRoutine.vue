@@ -9,7 +9,7 @@
       <v-select v-model="isPublic" :items="booleans" id="routinePrivacy" class="input" placeholder="¿Es pública?"/>
       <v-select v-model="difficulty" :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
     </div>
-    <v-btn class="btn" @click="create" :to="{name: 'Routines'}">
+    <v-btn class="btn" @click="create">
       <span class="mr-2">Crear Rutina</span>
     </v-btn>
   </div>
@@ -50,14 +50,16 @@ export default {
       this.result = JSON.stringify(result, null, 2)
       alert(this.result);
     },
+    clearResult() {
+      this.result = null
+    },
     async create() {
       try {
         let name = document.getElementById("routineName").value;
         let descr = document.getElementById("routineDescription").value;
         const routine = new Routine(name, descr, this.isPublic, this.difficulty.toLowerCase());
-        this.result = await this.$createRoutine(routine);
-        this.setResult(this.result);
-        const redirectPath = this.$route.query.redirect || "/CreateRoutine";
+        await this.$createRoutine(routine);
+        const redirectPath = this.$route.query.redirect || "/ModifyRoutine";
         await this.$router.push(redirectPath);
       } catch (e) {
         this.setResult(e);

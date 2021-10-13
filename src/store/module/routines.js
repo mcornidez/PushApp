@@ -4,7 +4,8 @@ import {RoutinesApi} from "../../../api/routines";
 export default {
     namespaced: true,
     state: {
-        routines: []
+        routines: [],
+        currentRoutine: null
     },
     getters: {
         findIndex(state) {
@@ -17,12 +18,16 @@ export default {
         push(state, routine) {
             state.items.push(routine)
         },
+        updateCurrentRoutine(state, currentRoutine) {
+            state.currentRoutine = currentRoutine
+        }
     },
     actions: {
         async createRoutine({getters, commit}, routine) {
             const result = await RoutinesApi.add(routine)
             if (!getters.findIndex(result))
                 commit('push', result)
+            commit('updateCurrentRoutine', result)
             return result
         },
     },

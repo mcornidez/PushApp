@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import security from './module/security';
 import sport from './module/sport';
 import exercise from './module/exercise';
-import routines from './module/routines'
+import routines from './module/routines';
+import routinesCycle from './module/routinesCycle';
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     security,
     sport,
     exercise,
-    routines
+    routines,
+    routinesCycle
   }
 })
 
