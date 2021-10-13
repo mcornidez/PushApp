@@ -31,6 +31,32 @@
         <span class="mr-2">Guardar</span>
       </v-btn>
     </div>
+    <div class="ex-box">
+      <b>{{ $currentRoutine.name }}</b>
+    </div>
+    <div class="form">
+      <input type="text" id="cycleName" class="input" placeholder="Nombre ciclo"/>
+      <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
+      <input type="text" id="repetitions" class="input" placeholder="Repeticiones"/>
+      <v-select v-model="cycleType" :items="cycleTypes" id="cycleType" class="input" placeholder="Tipo de circuito"/>
+    </div>
+    <v-btn class="btn" @click="createRoutineCycle">
+      <span class="mr-2">Crear circuito</span>
+    </v-btn>
+    <div class="form">
+      <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" id="exerciseName" class="input" placeholder="Ejercicio"/>
+      <input v-model="seconds" id="wsecs" type="text" min="0" class="input" placeholder="Segundos"/>
+      <input v-model="reps" id="wreps" type="text" min="0" class="input" placeholder="Repeticiones"/>
+    </div>
+    <v-btn class="btn" @click=addExerciseToCycle>
+      <span class="mr-2">Añadir Ejercicio</span>
+    </v-btn>
+    <v-btn class="btn" :to="{name: 'MyExercises'}">
+      <span class="mr-2">Mis Ejercicios</span>
+    </v-btn>
+    <v-btn class="btn" :to="{name: 'Routines'}">
+      <span class="mr-2">Guardar</span>
+    </v-btn>
   </div>
 </template>
 
