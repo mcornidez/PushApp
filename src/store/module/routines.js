@@ -1,4 +1,5 @@
 import {RoutinesApi} from "../../../api/routines";
+import {UserApi} from "../../../api/user";
 
 export default {
     namespaced: true,
@@ -62,6 +63,11 @@ export default {
         },
         async getAll({commit}, controller) {
             const result = await RoutinesApi.getAll(controller)
+            commit('replaceAll', result)
+            return result
+        },
+        async retrieveUserRoutines({commit}, userID){
+            const result = await UserApi.retrieveUserRoutines(userID)
             commit('replaceAll', result)
             return result
         }

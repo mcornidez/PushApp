@@ -3,36 +3,55 @@
     <div id="title">
       <b>Mis Rutinas</b>
     </div>
+    <v-btn class="btn" :to="{name: 'CreateRoutine'}">
+      <span class="mr-2">Añadir Nueva Rutina</span>
+    </v-btn>
     <div class="routines">
-      <div v-for="routine in routines" :key="routine.id" class="rutina">
-        <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}">
-          <h2>{{routine.name}}</h2>
-        </router-link>
+      <div class="grid-container">
+        <div v-for="routine in routines" :key="routine.id" class="rutina">
+          <router-link :to="{name: 'RoutineDetails', params:{slug:routine.id}}" style="text-decoration: none; color: inherit;">
+            <div class="grid-item">
+              <h2 style="text-decoration: underline">{{routine.name}}</h2>
+              <p>{{routine.detail}}</p>
+              <h3>Dificultad: {{routine.difficulty}}</h3>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 export default {
   name: 'Rutinas',
   data() {
     return {
       routines: [],
+      id: null
     }
   },
   async created(){
+    //await this.getCurrentUser();
     await this.getAll();
+  },
+  computed: {
+    ...mapState('security', {
+      $user: state => state.user,
+    }),
   },
   methods: {
     ...mapActions('routines', {
-      $getAll: 'getAll',
+      $retrieveUserRoutines: 'retrieveUserRoutines'
+    }),
+    ...mapActions('security',{
+      $getCurrentUser: 'getCurrentUser'
     }),
     async getAll(){
-      let aux = await this.$getAll();
-      this.routines = aux.content;
-    }
+      let res = await this.$retrieveUserRoutines(this.$user.id);
+      this.routines = res.content;
+    },
   }
 }
 </script>
@@ -48,14 +67,6 @@ export default {
 .rutina{
   align-items: center;
   margin: 30px;
-}
-.card{
-  background-color: lightslategrey;
-  width: 100%;
-  height:200px;
-  position:center;
-  border-color: black;
-  border-width: thick;
 }
 
 #background{
@@ -79,4 +90,31 @@ export default {
   position: center;
   border: 3px solid black;
 }
+
+.grid-container {
+  display: inline-grid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  position: center;
+  height: 60%;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+.grid-item {
+  background-color: rgba(232,232,232,0.8);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+  width: auto;
+  text-align: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.btn {
+  margin-top: 15px;
+  background-color: white;
+}
+
 </style>

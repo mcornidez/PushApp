@@ -24,6 +24,9 @@ class UserApi {
     static async update(credentials, controller){
         return await Api.put(UserApi.getUrl('current'), true, credentials, controller)
     }
+    static async retrieveUserRoutines(userId, controller) {
+        return Api.get(UserApi.getUrl(`${userId}/routines`), true, controller)
+    }
 }
 
 export class Validation{

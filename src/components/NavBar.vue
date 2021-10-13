@@ -34,13 +34,6 @@
     <v-icon>mdi-magnify</v-icon>
   </v-btn>
   <v-btn
-      :to="{name: 'CreateRoutine'}"
-      text
-      class="btn" :disabled="!canOperate">
-    <span class="mr-2">Crear Rutina</span>
-    <v-icon>mdi-plus-circle-multiple</v-icon>
-  </v-btn>
-  <v-btn
       :to="{name: 'Help'}"
       text
       class="btn">

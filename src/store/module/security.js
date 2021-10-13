@@ -21,6 +21,9 @@ export default {
         },
         setToken(state, token) {
             state.token = token
+        },
+        clearUser(state){
+            state.user = null
         }
     },
     actions: {
@@ -62,9 +65,9 @@ export default {
             const result = await UserApi.login(credentials)
             dispatch('updateToken', { token: result.token, rememberMe })
         },
-        async logout({dispatch}) {
+        async logout({commit}) {
             await UserApi.logout()
-            dispatch('removeToken')
+            commit("clearUser")
         },
         async getCurrentUser({state, commit}) {
             if (state.user)

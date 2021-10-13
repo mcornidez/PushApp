@@ -24,6 +24,7 @@ class RoutinesApi {
     static async getAll(controller) {
         return await Api.get(RoutinesApi.getUrl(), true, controller)
     }
+
 }
 class Routine {
     constructor(name, detail, isPublic, difficulty) {
