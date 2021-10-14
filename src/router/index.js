@@ -41,18 +41,24 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/routineview',
+    name: 'RoutineView',
+    component: () => import(/* webpackChunkName: "RoutineDetails" */ '../views/RoutineView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "Register" */ '../views/Register.vue')
   },
   {
-    path: '/Profile',
+    path: '/profile',
     name: 'Profile',
     component: () => import(/* webpackChunkName: "Profile" */ '../views/Profile.vue'),
     meta: { requiresAuth: true }
   },
   {
-    path: '/Exercises',
+    path: '/exercises',
     name: 'Exercises',
     component: () => import(/* webpackChunkName: "Profile" */ '../views/Exercises.vue'),
     meta: { requiresAuth: true }

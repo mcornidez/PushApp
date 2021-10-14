@@ -34,7 +34,7 @@
                 </div>
                 <br>
                 <div>
-                  <v-btn @click="setCurrent(routine)" :to="{name: 'RoutineDetails'}" class="btn">Ir a rutina</v-btn>
+                  <v-btn @click="setCurrent(routine)" class="btn">Ir a rutina</v-btn>
                 </div>
               </div>
           </div>
@@ -77,6 +77,8 @@ export default {
     },
     async setCurrent(routine){
       await this.$setActiveRoutine(routine);
+      const redirectPath = this.$route.query.redirect || "/routineview";
+      await this.$router.push(redirectPath);
     },
     async eraseCurrent(routine){
       await this.$delete(routine);
