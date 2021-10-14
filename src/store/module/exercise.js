@@ -5,7 +5,6 @@ export default {
     state: {
         items: [],
         currentExercise: null,
-        exercises: [],
         dummyVar: false
     },
     getters: {
@@ -64,7 +63,7 @@ export default {
         },
         async getAll({commit}, controller) {
             const result = await ExerciseApi.getAll(controller)
-            commit('replaceAll', result)
+            commit('replaceAll', result.content)
             return result
         },
         async setActiveExercise({commit}, ex){

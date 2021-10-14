@@ -11,7 +11,7 @@
     </div>
     <div class="routines">
       <div class="grid-container">
-        <div v-for="exercise in exercises" :key="exercise.id" class="rutina">
+        <div v-for="exercise in $exercises" :key="exercise.id" class="rutina">
           <div class="grid-item">
             <h2 style="text-decoration: underline">{{exercise.name}}</h2>
             <p>{{exercise.detail}}</p>
@@ -64,8 +64,7 @@ export default {
       $delete: 'delete'
     }),
     async getAll(){
-      let res = await this.$getAll();
-      this.exercises = res.content;
+      await this.$getAll();
     },
     async setCurrent(ex){
       await this.$setActiveExercise(ex);
