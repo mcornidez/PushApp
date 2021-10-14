@@ -46,22 +46,17 @@
 
 <div class="d-flex align-center">
   <v-btn
-      :to="{name: 'Routines'}"
-      text
-      class="btn" :disabled="!canOperate">
-    <v-icon>mdi-heart-outline</v-icon>
-  </v-btn>
-  <v-btn
       :to="{name: 'Profile'}"
       text
       class="btn">
     <v-icon>mdi-account-outline</v-icon>
   </v-btn>
   <v-btn
-      :to="{name: 'Profile'}"
+      @click="logout"
       text
       class="btn"
-      :disabled="!canOperate">
+      :disabled="!canOperate"
+      :to="{name: 'Login'}">
     <v-icon>mdi-logout-variant</v-icon>
   </v-btn>
 </div>

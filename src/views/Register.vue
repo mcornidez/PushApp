@@ -5,16 +5,23 @@
         <br/>
         <h1>Registro</h1>
         <br/>
-        <label for="name">Ingrese su nombre: </label>
+        <label for="mail">Ingrese su mail:
+          <span style="color:red; font-size: x-large">*</span>
+        </label>
+        <input v-model="mail" type="text" id="mail" class="input"/>
+        <label for="username">Ingrese un usuario:
+          <span style="color:red; font-size: x-large">*</span>
+        </label>
+        <input v-model="username" type="text" id="username" class="input"/>
+        <label for="password">Ingrese una contraseña:
+          <span style="color:red; font-size: x-large">*</span>
+        </label>
+        <input v-model="password" type="password" id="password" class="input"/>
+        <label for="name">Ingrese su nombre:</label>
         <input v-model="name" type="text" id="name" class="input"/>
         <label for="surname">Ingrese su apellido: </label>
         <input v-model="surname" type="text" id="surname" class="input"/>
-        <label for="mail">Ingrese su mail: </label>
-        <input v-model="mail" type="text" id="mail" class="input"/>
-        <label for="username">Ingrese un usuario: </label>
-        <input v-model="username" type="text" id="username" class="input"/>
-        <label for="password">Ingrese una contraseña: </label>
-        <input v-model="password" type="password" id="password" class="input"/>
+        <span for="gender">Género:</span>
         <v-select v-model="gender" :items="genders" id="gender" class="input" placeholder="Género"/>
         <button @click="register" class="btn">Registrarse</button>
         <br/>
@@ -88,7 +95,7 @@ export default {
   background-position: center;
 }
 #mainBody{
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.9);
   height:100%;
 }
 </style>

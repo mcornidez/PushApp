@@ -33,10 +33,11 @@ export default {
         }
     },
     actions: {
-        async create({getters, commit}, exercise) {
+        async create({commit}, exercise) {
             const result = await ExerciseApi.add(exercise)
-            if (!getters.findIndex(result))
+            //if (!getters.findIndex(result))
                 commit('push', result)
+            //alert(JSON.stringify(result, null, 2))
             return result
         },
         async modify({getters, commit}, exercise) {
