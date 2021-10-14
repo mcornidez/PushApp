@@ -9,8 +9,8 @@ class CycleExercisesApi {
     static async add(cycleId, exerciseId, cycleExercise, controller) {
         return await Api.post(CycleExercisesApi.getUrl(`${cycleId}/exercises/${exerciseId}`), true, cycleExercise, controller)
     }
-    static async getAll(controller) {
-        return await Api.get(CycleExercisesApi.getUrl(), true, controller)
+    static async getAll(cycleId, controller) {
+        return await Api.get(CycleExercisesApi.getUrl(`${cycleId}/exercises`), true, controller)
     }
 }
 class CycleExercises {

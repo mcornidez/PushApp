@@ -9,6 +9,9 @@ class RoutinesCycleApi {
     static async add(routineId, routineCycle, controller) {
         return await Api.post(RoutinesCycleApi.getUrl(`${routineId}/cycles`), true, routineCycle, controller)
     }
+    static async getAll(routineId, controller) {
+        return await Api.get(RoutinesCycleApi.getUrl(`${routineId}/cycles`), true, controller)
+    }
 }
 class RoutinesCycle {
     constructor(name, detail, type, order, repetitions, routineId) {

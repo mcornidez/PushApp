@@ -1,20 +1,31 @@
 import {RoutinesCycleApi} from "../../../api/routinesCycle";
 
+
 export default {
     namespaced: true,
     state: {
-        currentRoutineCycleId: null
+        currentRoutineCycle: null,
+        currentCycles: [],
     },
     mutations: {
-        currentRoutineCycleId(id) {
-            this.currentRoutineCycleId = id
+        currentRoutineCycle(state, id) {
+            state.currentRoutineCycle = id
+        },
+        updateCurrentCycles(state, routineCycles) {
+            state.currentCycles = routineCycles
         }
     },
     actions: {
         async createRoutineCycle({commit}, routineCycle) {
             const result = await RoutinesCycleApi.add(routineCycle.routineId, routineCycle);
-            commit('currentRoutineCycleId', result.id);
+            commit('currentRoutineCycle', result);
             return result;
         },
+        async getAllCycles({commit}, routineId) {
+            const result = await RoutinesCycleApi.getAll(routineId)
+            commit('updateCurrentCycles', result.content);
+            return result.content;
+        },
+
     },
 }

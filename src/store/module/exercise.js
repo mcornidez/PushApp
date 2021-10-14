@@ -24,7 +24,7 @@ export default {
         splice(state, index) {
             state.items.splice(index, 1)
         },
-        replaceAll(state, exercises) {
+        replaceAllExercises(state, exercises) {
             state.items = exercises
         },
         updateCurrentExercise(state, ex) {
@@ -63,8 +63,8 @@ export default {
         },
         async getAll({commit}, controller) {
             const result = await ExerciseApi.getAll(controller)
-            commit('replaceAll', result.content)
-            return result
+            commit('replaceAllExercises', result.content)
+            return result.content
         },
         async setActiveExercise({commit}, ex){
             commit('updateCurrentExercise', ex);

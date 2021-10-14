@@ -23,11 +23,11 @@
                 <p>{{exercise.name}}, {{duration}} secs, {{repetitions}} reps</p>
               </div>
               <div class="form">
-                <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" class="input" placeholder="Ejercicio"/>
+                <v-select @click=getAllExercisesNames :items="exercisesNames" v-model="exerciseSelected" class="input" placeholder="Ejercicio"/>
                 <input id="wsecs" type="number" min=0 class="input" placeholder="Segundos"/>
                 <input id="wreps" type="number" min=0 class="input" placeholder="Repeticiones"/>
               </div>
-              <v-btn class="btn" @click=addExerciseToCycle>
+              <v-btn class="btn" @click=addExerciseToCycle(type)>
                 <span class="mr-2">Añadir Ejercicio</span>
               </v-btn>
             </div>
@@ -61,15 +61,23 @@ export default {
       exerciseCycles: [],
       exerciseOrder: 0,
       cycleType: null,
+      cycleId: 0,
     }
   },
   computed: {
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
     }),
+    ...mapState('exercise', {
+      $exercises: state => state.items,
+    }),
     ...mapState('routinesCycle', {
       $currentRoutineCycle: state => state.currentRoutineCycle,
+      $currentRoutineCycles: state => state.currentCycles,
     })
+  },
+  async created() {
+    await this.getRoutineCycles();
   },
   methods: {
     ...mapActions('exercise', {
@@ -77,21 +85,26 @@ export default {
     }),
     ...mapActions('routinesCycle', {
       $createRoutineCycle: 'createRoutineCycle',
+      $getRoutineCycles: 'getAllCycles',
     }),
     ...mapActions('cyclesExercises', {
       $addCycleExercise: 'addCycleExercise',
-      $getAllCycles: 'getAll'
+      $getAllExercisesFromCycle: 'getAllExercisesFromCycle'
     }),
     setResult(result) {
       this.result = JSON.stringify(result, null, 2)
       alert(this.result);
     },
+
     clearResult() {
       this.result = null
     },
-    async getAll(){
-      let exercises = await this.$getAll();
-      this.exercisesNames = exercises.content.map(function(obj) {
+    async getRoutineCycles() {
+      await this.$getRoutineCycles(this.$currentRoutine.id);
+    },
+    async getAllExercisesNames(){
+      await this.$getAll();
+      this.exercisesNames = this.$exercises.map(function(obj) {
         return obj["name"];
       });
     },
@@ -101,24 +114,58 @@ export default {
     },
     async createRoutineCycle(type) {
       try{
-        this.cycleOrder++;
+        this.selectCycleOrder(type);
         this.exerciseOrder = 0;
         let descr = document.getElementById("cycleDescription").value;
         const routineCycle = new RoutinesCycle(type, descr, type, this.cycleOrder, parseInt(this.cycleReps), this.$currentRoutine.id);
         await this.$createRoutineCycle(routineCycle);
+        await this.getRoutineCycles();
       } catch(e) {
         this.setResult(e);
       }
     },
-    async addExerciseToCycle() {
+    selectCycleOrder(type){
+      switch (type) {
+        case 'warmup':
+          this.cycleOrder = 1;
+          break;
+        case 'exercise':
+          this.cycleOrder = 2;
+          break;
+        case 'cooldown':
+          this.cycleOrder = 3;
+          break;
+      }
+    },
+    async addExerciseToCycle(type) {
       try {
-        this.exerciseOrder++;
-        const exerciseId = this.exercises.content.find(item => item.name === this.exerciseSelected).id;
-        const cycleExercise = new CycleExercises(this.exerciseOrder, parseInt(this.seconds), parseInt(this.reps), this.$currentRoutineCycle.id, exerciseId);
+        this.selectCycleId(type);
+        await this.getExerciseOrder();
+        let seconds = document.getElementById("wsecs").value;
+        let reps = document.getElementById("wreps").value;
+        const exerciseId = this.$exercises.find(item => item.name === this.exerciseSelected).id;
+        const cycleExercise = new CycleExercises(this.exerciseOrder, parseInt(seconds), parseInt(reps), this.cycleId, exerciseId);
         await this.$addCycleExercise(cycleExercise);
-        await this.getAllCycles();
       } catch(e) {
         this.setResult(e);
+      }
+    },
+    async getExerciseOrder() {
+      const result = await this.$getAllExercisesFromCycle(this.cycleId);
+      this.exerciseOrder = result.totalCount;
+      this.exerciseOrder++;
+    },
+    selectCycleId(type) {
+      switch (type) {
+        case 'warmup':
+          this.cycleId = this.$currentRoutineCycles[0].id;
+          break;
+        case 'exercise':
+          this.cycleId = this.$currentRoutineCycles[1].id;
+          break;
+        case 'cooldown':
+          this.cycleId = this.$currentRoutineCycles[2].id;
+          break;
       }
     }
   }
