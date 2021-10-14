@@ -1,42 +1,44 @@
 <template>
   <div id="home">
-    <div id="welcome">
-      <b>¡Bienvenido, {{$user.username}}!</b>
-    </div>
-    <!-- Inspirado en https://www.w3schools.com/css/css_grid.asp -->
-    <div class="grid-container">
-      <router-link style="text-decoration: none; color: inherit" :to="{name:'Routines'}">
-        <div class="grid-item">
-          <v-icon size="80"  class="icon" color="#2c3e50">mdi-heart-multiple</v-icon>
-          <div class="subtitulo">Mis Rutinas</div>
-        </div>
-      </router-link>
-      <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
-        <div class="grid-item">
-          <v-icon size="80"  class="icon" color="#2c3e50">mdi-magnify</v-icon>
-          <div class="subtitulo">Explorar</div>
-        </div>
-      </router-link>
-      <router-link style="text-decoration: none; color: inherit" :to="{name:'Profile'}">
-        <div class="grid-item">
-          <v-icon size="80" class="icon" color="#2c3e50">mdi-account-circle</v-icon>
-          <div class="subtitulo">Mi Perfil</div>
-        </div>
-      </router-link>
-      <router-link style="text-decoration: none; color: inherit" :to="{name:'CreateRoutine'}">
-        <div class="grid-item">
-          <v-icon size="80"  class="icon" color="#2c3e50">mdi-plus-circle-multiple</v-icon>
-          <div class="subtitulo">Crear Rutina</div>
-        </div>
-      </router-link>
-    </div>
-    <div v-if="activeRoutine" class="aux">
-      <div class="progBar">
-        Progreso: 50%
+    <div class="body">
+      <div id="welcome">
+        <b>¡Bienvenido, {{$user.username}}!</b>
       </div>
-      <v-btn :to="{name: 'CurrentRoutine'}" class="boton" fab dark small color="orange">
-        <v-icon dark>mdi-arrow-right-thin-circle-outline</v-icon>
-      </v-btn>
+      <!-- Inspirado en https://www.w3schools.com/css/css_grid.asp -->
+      <div class="grid-container">
+        <router-link style="text-decoration: none; color: inherit" :to="{name:'Routines'}">
+          <div class="grid-item">
+            <v-icon size="80"  class="icon" color="#2c3e50">mdi-heart-multiple</v-icon>
+            <div class="subtitulo">Mis Rutinas</div>
+          </div>
+        </router-link>
+        <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
+          <div class="grid-item">
+            <v-icon size="80"  class="icon" color="#2c3e50">mdi-magnify</v-icon>
+            <div class="subtitulo">Explorar</div>
+          </div>
+        </router-link>
+        <router-link style="text-decoration: none; color: inherit" :to="{name:'Profile'}">
+          <div class="grid-item">
+            <v-icon size="80" class="icon" color="#2c3e50">mdi-account-circle</v-icon>
+            <div class="subtitulo">Mi Perfil</div>
+          </div>
+        </router-link>
+        <router-link style="text-decoration: none; color: inherit" :to="{name:'CreateRoutine'}">
+          <div class="grid-item">
+            <v-icon size="80"  class="icon" color="#2c3e50">mdi-plus-circle-multiple</v-icon>
+            <div class="subtitulo">Crear Rutina</div>
+          </div>
+        </router-link>
+      </div>
+      <div v-if="activeRoutine" class="aux">
+        <div class="progBar">
+          Progreso: 50%
+        </div>
+        <v-btn :to="{name: 'CurrentRoutine'}" class="boton" fab dark small color="orange">
+          <v-icon dark>mdi-arrow-right-thin-circle-outline</v-icon>
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -106,21 +108,22 @@ export default {
   font-family: "Raleway", sans-serif;
   color: black;
 }
-#welcome{
-  background: rgba(255,255,255,0.9);
-  font-size: xxx-large;
-  color: black;
-  height: 15vh;
-  align-content: center;
-  text-align: center;
-  min-width: 30vw;
-  max-width: 50vw;
-  margin: auto;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  border: 3px solid black;
-  border-top: 0px;
+.body{
   padding-top: 20px;
+}
+#welcome{
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: bolder;
+  font-size: xxx-large;
+  padding-bottom: 0;
+  margin: auto;
+  vertical-align: middle;
+  border-radius: 15px;
+  width: 40vw;
+  background-color: lightblue;
+  position: center;
+  border: 3px solid black;
 }
 
 .grid-container {

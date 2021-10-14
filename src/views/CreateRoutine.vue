@@ -11,18 +11,23 @@
         <v-select v-model="difficulty" :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
       </div>
       <v-btn class="btn" @click="create">
-        <span class="mr-2">Crear Rutina</span>
+        <span class="mr-2 text--black">Crear Rutina</span>
       </v-btn>
     </div>
+    <GoBack/>
   </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
 import {Routine} from "../../api/routines";
+import GoBack from "../components/GoBack.vue"
 
 export default {
   name: "CreateRoutine",
+  components: {
+    GoBack
+  },
   data() {
     return {
       result: null,
@@ -122,6 +127,7 @@ export default {
   color: black;
   opacity: 90%;
   font-weight: bold;
+  margin-top:0;
 }
 
 .body {

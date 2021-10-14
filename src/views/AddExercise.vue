@@ -1,6 +1,5 @@
 <template>
   <div id="background">
-    <GoBack/>
     <div class="body">
       <div id="title">
         <b>Añadir Ejercicio</b>
@@ -13,6 +12,7 @@
       <v-btn class="btn" @click="create">
         <span class="mr-2">Añadir Ejercicio</span>
       </v-btn>
+      <GoBack/>
     </div>
   </div>
 </template>
@@ -20,8 +20,13 @@
 <script>
 import {Exercise} from "../../api/exercise";
 import {mapActions} from 'vuex'
+import GoBack from "../components/GoBack.vue"
+
 export default {
   name: "AddExercise",
+  components:{
+    GoBack
+  },
   data() {
     return {
       result: null,
@@ -95,8 +100,15 @@ export default {
   color: black;
   opacity: 90%;
   font-weight: bold;
+  margin-top:0;
 }
 .body {
   padding-top: 20px;
+}
+.btn {
+  margin-right: 15px;
+  margin-left: 15px;
+  background-color: rgba(255,255,255, 1);
+  font-weight: bolder;
 }
 </style>

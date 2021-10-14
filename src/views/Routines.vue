@@ -46,8 +46,10 @@
 
 <script>
 import {mapActions, mapState} from "vuex";
+
 export default {
   name: 'Rutinas',
+  components: {},
   data() {
     return {
       routines: [],
@@ -151,6 +153,7 @@ export default {
   margin-left: 15px;
   background-color: grey;
   font-weight: bolder;
+  color: black;
 }
 
 .body {

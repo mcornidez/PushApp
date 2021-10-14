@@ -56,6 +56,8 @@ import {Credentials2} from "../../api/user";
 
 export default {
   name: "Profile",
+  components: {
+  },
   data(){
     return{
       changeName: false,

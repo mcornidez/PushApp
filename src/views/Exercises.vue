@@ -84,6 +84,9 @@ export default {
   background-size: cover;
   justify-content: space-between;
 }
+.body{
+  padding-top: 20px;
+}
 .rutina{
   align-items: center;
   margin: 30px;

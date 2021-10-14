@@ -39,6 +39,7 @@
     <v-btn class="btn" :to="{name: 'Routines'}">
       <span class="mr-2">Guardar</span>
     </v-btn>
+    <GoBack/>
   </div>
 </template>
 
@@ -46,9 +47,11 @@
 import {mapActions, mapState} from "vuex";
 import {RoutinesCycle} from "../../api/routinesCycle";
 import {CycleExercises} from "../../api/cyclesExercises";
+import GoBack from "../components/GoBack";
 
 export default {
   name: "ModifyRoutine",
+  components: {GoBack},
   data() {
     return {
       cycleTypes: ["warmup", "exercise", "cooldown"],
@@ -56,6 +59,9 @@ export default {
       exerciseCycleContent: null,
       cooldownCycleContent: null
     }
+  },
+  async setInfo(){
+    await this.getAll();
   },
   computed: {
     ...mapState('routines', {
@@ -76,12 +82,6 @@ export default {
     },
     clearResult() {
       this.result = null
-    },
-    async getAll(){
-      let exercises = await this.$getAll();
-      this.exercisesNames = exercises.content.map(function(obj) {
-        return obj["name"];
-      });
     },
     async getAllCycles(){
       let exercises = await this.$getAllCycles();

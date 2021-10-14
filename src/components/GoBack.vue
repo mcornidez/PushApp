@@ -1,7 +1,10 @@
 <template>
-  <span class="go-back">
-    <button @click="goBack" class="btn">Go Back</button>
-  </span>
+    <!--<span class="go-back">
+      <button @click="goBack" class="btn text--black">Go Back</button>
+    </span>-->
+  <v-btn class="btn" @click="goBack">
+    <span class="mr-2">Volver</span>
+  </v-btn>
 </template>
 
 <script>
@@ -17,10 +20,21 @@ export default {
 
 <style scoped>
 .go-back {
-  display: flex;
+  margin:auto;
+  align-self: center;
   cursor: pointer;
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: bolder;
 }
 button {
   border: 0;
+}
+
+.btn {
+  margin-right: 15px;
+  margin-left: 15px;
+  background-color: rgba(255,255,255, 1);
+  font-weight: bolder;
 }
 </style>
