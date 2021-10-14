@@ -14,7 +14,7 @@
       <router-link style="text-decoration: none; color: inherit" :to="{name:'Explore'}">
         <div class="grid-item">
           <v-icon size="80"  class="icon" color="#2c3e50">mdi-magnify</v-icon>
-          <div class="subtitulo">Buscar</div>
+          <div class="subtitulo">Explorar</div>
         </div>
       </router-link>
       <router-link style="text-decoration: none; color: inherit" :to="{name:'Profile'}">
@@ -26,7 +26,7 @@
       <router-link style="text-decoration: none; color: inherit" :to="{name:'CreateRoutine'}">
         <div class="grid-item">
           <v-icon size="80"  class="icon" color="#2c3e50">mdi-plus-circle-multiple</v-icon>
-          <div class="subtitulo">Crear</div>
+          <div class="subtitulo">Crear Rutina</div>
         </div>
       </router-link>
     </div>
@@ -107,7 +107,7 @@ export default {
   color: black;
 }
 #welcome{
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.9);
   font-size: xxx-large;
   color: black;
   height: 15vh;
@@ -120,6 +120,7 @@ export default {
   border-bottom-right-radius: 15px;
   border: 3px solid black;
   border-top: 0px;
+  padding-top: 20px;
 }
 
 .grid-container {

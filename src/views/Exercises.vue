@@ -16,12 +16,16 @@
             <h2 style="text-decoration: underline">{{exercise.name}}</h2>
             <p>{{exercise.detail}}</p>
             <div class="editSpan">
-              <v-btn class="btn" @click="setCurrent(exercise)" :to="{name: 'ModifyExercise'}">Editar</v-btn>
-              <v-icon color="darkgrey" >mdi-square-edit-outline</v-icon>
+              <router-link :to="{name: 'ModifyExercise'}" style="text-decoration: none">
+                <v-btn class="btn" @click="setCurrent(exercise)">Editar</v-btn>
+                <v-icon color="darkgrey"> mdi-square-edit-outline</v-icon>
+              </router-link>
             </div>
             <div class="eraseSpan mt-4">
-              <v-btn class="btn" @click="eraseCurrent(exercise)">Borrar</v-btn>
-              <v-icon color="darkgrey" >mdi-trash-can-outline</v-icon>
+              <router-link :to="{name: 'Exercises'}" style="text-decoration: none">
+                <v-btn class="btn" @click="eraseCurrent(exercise)">Borrar</v-btn>
+                <v-icon color="darkgrey" >mdi-trash-can-outline</v-icon>
+              </router-link>
             </div>
           </div>
         </div>

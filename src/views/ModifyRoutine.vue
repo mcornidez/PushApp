@@ -7,56 +7,40 @@
       <div class="ex-box">
         <b>{{ $currentRoutine.name }}</b>
       </div>
-      <div class="form">
-        <input type="text" id="cycleName" class="input" placeholder="Nombre ciclo"/>
-        <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
-        <input type="text" id="repetitions" class="input" placeholder="Repeticiones"/>
-        <v-select v-model="cycleType" :items="cycleTypes" id="cycleType" class="input" placeholder="Tipo de circuito"/>
-      </div>
-      <v-btn class="btn" @click="createRoutineCycle">
-        <span class="mr-2">Crear circuito</span>
-      </v-btn>
-      <div class="form">
-        <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" id="exerciseName" class="input" placeholder="Ejercicio"/>
-        <input v-model="seconds" id="wsecs" type="text" min="0" class="input" placeholder="Segundos"/>
-        <input v-model="reps" id="wreps" type="text" min="0" class="input" placeholder="Repeticiones"/>
-      </div>
-      <v-btn class="btn" @click=addExerciseToCycle>
-        <span class="mr-2">Añadir Ejercicio</span>
-      </v-btn>
-      <v-btn class="btn" :to="{name: 'MyExercises'}">
+      <div class="routines">
+        <div class="grid-container">
+          <div v-for="type in cycleTypes" v-bind:key="type" class="rutina">
+            <div class="grid-item">
+              <h2 style="text-decoration: underline">{{type.toUpperCase()}}</h2>
+              <div class="form">
+                <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
+                <input v-model="cycleReps" type="number" min=0 id="repetitions" class="input" placeholder="Repeticiones"/>
+              </div>
+              <v-btn class="btn" @click="createRoutineCycle(type)">
+                <span class="mr-2">Crear circuito</span>
+              </v-btn>
+              <div v-for="exercise in exerciseCycles" v-bind:key="exercise" class="ex">
+                <p>{{exercise.name}}, {{duration}} secs, {{repetitions}} reps</p>
+              </div>
+              <div class="form">
+                <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" class="input" placeholder="Ejercicio"/>
+                <input id="wsecs" type="number" min=0 class="input" placeholder="Segundos"/>
+                <input id="wreps" type="number" min=0 class="input" placeholder="Repeticiones"/>
+              </div>
+              <v-btn class="btn" @click=addExerciseToCycle>
+                <span class="mr-2">Añadir Ejercicio</span>
+              </v-btn>
+            </div>
+          </div>
+        </div>
+      <v-btn class="btn" :to="{name: 'Exercises'}">
         <span class="mr-2">Mis Ejercicios</span>
       </v-btn>
       <v-btn class="btn" :to="{name: 'Routines'}">
         <span class="mr-2">Guardar</span>
       </v-btn>
     </div>
-    <div class="ex-box">
-      <b>{{ $currentRoutine.name }}</b>
-    </div>
-    <div class="form">
-      <input type="text" id="cycleName" class="input" placeholder="Nombre ciclo"/>
-      <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
-      <input type="text" id="repetitions" class="input" placeholder="Repeticiones"/>
-      <v-select v-model="cycleType" :items="cycleTypes" id="cycleType" class="input" placeholder="Tipo de circuito"/>
-    </div>
-    <v-btn class="btn" @click="createRoutineCycle">
-      <span class="mr-2">Crear circuito</span>
-    </v-btn>
-    <div class="form">
-      <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" id="exerciseName" class="input" placeholder="Ejercicio"/>
-      <input v-model="seconds" id="wsecs" type="text" min="0" class="input" placeholder="Segundos"/>
-      <input v-model="reps" id="wreps" type="text" min="0" class="input" placeholder="Repeticiones"/>
-    </div>
-    <v-btn class="btn" @click=addExerciseToCycle>
-      <span class="mr-2">Añadir Ejercicio</span>
-    </v-btn>
-    <v-btn class="btn" :to="{name: 'MyExercises'}">
-      <span class="mr-2">Mis Ejercicios</span>
-    </v-btn>
-    <v-btn class="btn" :to="{name: 'Routines'}">
-      <span class="mr-2">Guardar</span>
-    </v-btn>
+  </div>
   </div>
 </template>
 
@@ -69,19 +53,14 @@ export default {
   name: "ModifyRoutine",
   data() {
     return {
-      exercises: [],
       exercisesNames: [],
+      cycleTypes: ["warmup", "exercise", "cooldown"],
       exerciseSelected: null,
-      seconds: null,
-      reps: null,
+      cycleReps: 0,
       cycleOrder: 0,
+      exerciseCycles: [],
       exerciseOrder: 0,
       cycleType: null,
-      cycleTypes: [
-        "warmup",
-        "exercise",
-        "cooldown"
-      ],
     }
   },
   computed: {
@@ -101,6 +80,7 @@ export default {
     }),
     ...mapActions('cyclesExercises', {
       $addCycleExercise: 'addCycleExercise',
+      $getAllCycles: 'getAll'
     }),
     setResult(result) {
       this.result = JSON.stringify(result, null, 2)
@@ -110,22 +90,21 @@ export default {
       this.result = null
     },
     async getAll(){
-      this.exercises = await this.$getAll();
-      this.getExercisesNames(this.exercises);
-    },
-    getExercisesNames(exercises) {
+      let exercises = await this.$getAll();
       this.exercisesNames = exercises.content.map(function(obj) {
         return obj["name"];
       });
     },
-    async createRoutineCycle() {
+    async getAllCycles(){
+      let exercises = await this.$getAllCycles();
+      this.exerciseCycles = exercises.content;
+    },
+    async createRoutineCycle(type) {
       try{
         this.cycleOrder++;
         this.exerciseOrder = 0;
-        let name = document.getElementById("cycleName").value;
         let descr = document.getElementById("cycleDescription").value;
-        let reps = document.getElementById("repetitions").value
-        const routineCycle = new RoutinesCycle(name, descr, this.cycleType, this.cycleOrder, parseInt(reps), this.$currentRoutine.id);
+        const routineCycle = new RoutinesCycle(type, descr, type, this.cycleOrder, this.cycleReps, this.$currentRoutine.id);
         await this.$createRoutineCycle(routineCycle);
       } catch(e) {
         this.setResult(e);
@@ -137,6 +116,7 @@ export default {
         const exerciseId = this.exercises.content.find(item => item.name === this.exerciseSelected).id;
         const cycleExercise = new CycleExercises(this.exerciseOrder, parseInt(this.seconds), parseInt(this.reps), this.$currentRoutineCycle.id, exerciseId);
         await this.$addCycleExercise(cycleExercise);
+        await this.getAllCycles();
       } catch(e) {
         this.setResult(e);
       }
@@ -167,6 +147,27 @@ export default {
   position: center;
   border: 3px solid black;
 }
+.grid-container {
+  display: inline-grid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  position: center;
+  height: 60%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+.grid-item {
+  background-color: rgba(232,232,232,0.8);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+  width: auto;
+  text-align: center;
+  justify-content: center;
+  overflow: hidden;
+}
 .btn {
   margin: 15px;
   background-color: white;
@@ -183,10 +184,9 @@ export default {
 }
 .form{
   justify-content: center;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-  margin-right: auto;
+  margin-top: 2vh;
   margin-left: auto;
+  margin-right: auto;
   display :flex;
   width: 50%;
 }
@@ -194,6 +194,8 @@ export default {
   color: black;
   opacity: 90%;
   font-weight: bold;
+  margin-top: 0;
+  width: auto;
 }
 
 .body {

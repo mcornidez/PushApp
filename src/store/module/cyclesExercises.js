@@ -17,5 +17,10 @@ export default {
             commit('updateCurrentCycleExercise', result);
             return result;
         },
+        async getAll({commit}, controller) {
+            const result = await CycleExercisesApi.getAll(controller)
+            commit('replaceAll', result)
+            return result
+        },
     },
 }

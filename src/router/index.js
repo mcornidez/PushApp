@@ -83,7 +83,7 @@ const routes = [
     path:'/ModifyRoutine',
     name: 'ModifyRoutine',
     component: () => import(/* webpackChunkName: "ModifyRoutine" */ '../views/ModifyRoutine.vue'),
-    //meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path:'/AddExercise',
@@ -95,7 +95,7 @@ const routes = [
     path:'/ModifyExercise',
     name: 'ModifyExercise',
     component: () => import(/* webpackChunkName: "ModifyExercise" */ '../views/ModifyExercise.vue'),
-    //meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path:'/Verification',

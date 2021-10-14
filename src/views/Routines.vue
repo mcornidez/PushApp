@@ -19,7 +19,23 @@
                 <h2 style="text-decoration: underline">{{routine.name}}</h2>
                 <p>{{routine.detail}}</p>
                 <h3>Dificultad: {{routine.difficulty}}</h3>
-                <v-btn @click="setCurrent(routine)" :to="{name: 'RoutineDetails'}">Ir a rutina</v-btn>
+                <br>
+                <div class="editSpan">
+                  <router-link :to="{name: 'ModifyRoutine'}" style="text-decoration: none">
+                    <v-btn class="btn" @click="setCurrent(routine)">Editar</v-btn>
+                    <v-icon color="darkgrey"> mdi-square-edit-outline</v-icon>
+                  </router-link>
+                </div>
+                <div class="eraseSpan mt-4">
+                  <router-link :to="{name: 'Routines'}" style="text-decoration: none">
+                    <v-btn class="btn" @click="eraseCurrent(routine)">Borrar</v-btn>
+                    <v-icon color="darkgrey" >mdi-trash-can-outline</v-icon>
+                  </router-link>
+                </div>
+                <br>
+                <div>
+                  <v-btn @click="setCurrent(routine)" :to="{name: 'RoutineDetails'}" class="btn">Ir a rutina</v-btn>
+                </div>
               </div>
           </div>
         </div>
@@ -49,7 +65,8 @@ export default {
   methods: {
     ...mapActions('routines', {
       $retrieveUserRoutines: 'retrieveUserRoutines',
-      $setActiveRoutine: 'setActiveRoutine'
+      $setActiveRoutine: 'setActiveRoutine',
+      $delete: 'delete'
     }),
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
@@ -60,6 +77,10 @@ export default {
     },
     async setCurrent(routine){
       await this.$setActiveRoutine(routine);
+    },
+    async eraseCurrent(routine){
+      await this.$delete(routine);
+      await this.getAll();
     }
   }
 }

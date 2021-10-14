@@ -13,14 +13,13 @@
       <v-btn class="btn" @click="create">
         <span class="mr-2">Añadir Ejercicio</span>
       </v-btn>
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import {Exercise} from "../../api/exercise";
 import {mapActions} from 'vuex'
-
 export default {
   name: "AddExercise",
   data() {
@@ -41,7 +40,6 @@ export default {
     }),
     setResult(result){
       this.result = JSON.stringify(result, null, 2)
-      alert(this.result);
     },
     clearResult() {
       this.result = null
@@ -52,12 +50,11 @@ export default {
         let descr = document.getElementById("edescr").value;
         const exercise = new Exercise(name, descr, this.type);
         await this.$create(exercise);
-        const redirectPath = this.$route.query.redirect || "/AddExercise";
+        const redirectPath = this.$route.query.redirect || "/Exercises";
         await this.$router.push(redirectPath);
       }
       catch(e){
         this.setResult(e);
-        this.clearResult();
       }
     }
   }
@@ -86,7 +83,6 @@ export default {
   position: center;
   border: 3px solid black;
 }
-
 .form{
   justify-content: center;
   margin-top: 5vh;
@@ -95,13 +91,11 @@ export default {
   display :flex;
   width: 50%;
 }
-
 .input {
   color: black;
   opacity: 90%;
   font-weight: bold;
 }
-
 .body {
   padding-top: 20px;
 }

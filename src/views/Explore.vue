@@ -12,6 +12,10 @@
                 <h2 style="text-decoration: underline">{{routine.name}}</h2>
                 <p>{{routine.detail}}</p>
                 <h3>Dificultad: {{routine.difficulty}}</h3>
+                <br>
+                <div>
+                  <v-btn @click="setCurrent(routine)" :to="{name: 'RoutineDetails'}" class="btn">Ir a rutina</v-btn>
+                </div>
               </div>
             </router-link>
           </div>
@@ -36,11 +40,15 @@ export default {
   methods: {
     ...mapActions('routines', {
       $getAll: 'getAll',
+      $setActiveRoutine: 'setActiveRoutine'
     }),
     async getAll(){
       let aux = await this.$getAll();
       this.routines = aux.content;
-    }
+    },
+    async setCurrent(routine){
+      await this.$setActiveRoutine(routine);
+    },
   }
 }
 </script>
