@@ -65,7 +65,7 @@ export default {
         let mail = document.getElementById("mail").value;
         let user = document.getElementById("username").value;
         let pass = document.getElementById("password").value;
-        const credentials = new Credentials2(user, pass, mail, nombre, apellido, this.gender);
+        const credentials = new Credentials2(user, pass, mail, nombre, apellido, this.gender, ".");
         await this.$addUser(credentials);
         const redirectPath = this.$route.query.redirect || "/";
         await this.$router.push(redirectPath);
