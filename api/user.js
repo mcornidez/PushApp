@@ -45,7 +45,7 @@ class Credentials {
 }
 
 export class Credentials2{
-    constructor(username, password, email, firstName, lastName, gender) {
+    constructor(username, password, email, firstName, lastName, gender, picture) {
         this.username = username
         this.password = password
         this.firstName = firstName
@@ -54,7 +54,7 @@ export class Credentials2{
         this.birthdate = 0
         this.email = email
         this.phone = '123456789' //No planeamos utilizar telefonos, pero es un parametro obligatorio en constructores
-        this.avatarUrl = '.'
+        this.avatarUrl = picture
         this.metadata = null
     }
 }
