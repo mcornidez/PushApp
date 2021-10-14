@@ -18,11 +18,15 @@ comience por el caso (1).
 
 1) Abrir una consola de comandos
 2) Asegurarse de tener instalado node.js.
+	
 	2.1) En caso de tenerlo, asegurarse que sea superior a la versión 14.18.0
+	
 	2.2) Caso contrario, se puede descargar de https://nodejs.org/en/ 
 	(disponible para todos los sistemas operativos)
+	
 	2.3) Para verificar la correcta instalación, correr en la consola el
 	comando ```node --version```
+	
 3) Una vez instalado, colocarse en la terminal sobre la carpeta donde se encuentra
 la API. 
 4) Allí, ejecutar el comando ```npm install``` y aguarde a que se 
