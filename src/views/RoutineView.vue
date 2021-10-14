@@ -2,79 +2,67 @@
   <div id="background">
     <div class="body">
       <div id="title">
-        <b>Modificar Rutina</b>
-      </div>
-      <div class="ex-box">
         <b>{{ $currentRoutine.name }}</b>
       </div>
       <div class="routines">
         <div class="grid-container">
-          <div v-for="type in cycleTypes" v-bind:key="type" class="rutina">
-            <div class="grid-item">
-              <h2 style="text-decoration: underline">{{type.toUpperCase()}}</h2>
-              <div class="form">
-                <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
-                <input v-model="cycleReps" type="number" min=0 id="repetitions" class="input" placeholder="Repeticiones"/>
-              </div>
-              <v-btn class="btn" @click="createRoutineCycle(type)">
-                <span class="mr-2">Crear circuito</span>
-              </v-btn>
-              <div v-for="exercise in exerciseCycles" v-bind:key="exercise" class="ex">
-                <p>{{exercise.name}}, {{duration}} secs, {{repetitions}} reps</p>
-              </div>
-              <div class="form">
-                <v-select @click=getAll :items="exercisesNames" v-model="exerciseSelected" class="input" placeholder="Ejercicio"/>
-                <input id="wsecs" type="number" min=0 class="input" placeholder="Segundos"/>
-                <input id="wreps" type="number" min=0 class="input" placeholder="Repeticiones"/>
-              </div>
-              <v-btn class="btn" @click=addExerciseToCycle>
-                <span class="mr-2">Añadir Ejercicio</span>
-              </v-btn>
+          <div class="grid-item">
+            <h2 style="text-decoration: underline">WARMUP</h2>
+            <div v-for="content in warmupCycleContent" v-bind:key="content" class="rutina">
+              <p>{{content.exercise.name}}</p>
+              <p>Duración: {{content.duration}}</p>
+              <p>Repeticiones: {{content.repetitions}}</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <h2 style="text-decoration: underline">EXERCISE</h2>
+            <div v-for="content in exerciseCycleContent" v-bind:key="content" class="rutina">
+              <p>{{content.exercise.name}}</p>
+              <p>Duración: {{content.duration}}</p>
+              <p>Repeticiones: {{content.repetitions}}</p>
+            </div>
+          </div>
+          <div class="grid-item">
+            <h2 style="text-decoration: underline">COOLDOWN</h2>
+            <div v-for="content in cooldownCycleContent" v-bind:key="content" class="rutina">
+              <p>{{content.exercise.name}}</p>
+              <p>Duración: {{content.duration}}</p>
+              <p>Repeticiones: {{content.repetitions}}</p>
             </div>
           </div>
         </div>
-      <v-btn class="btn" :to="{name: 'Exercises'}">
-        <span class="mr-2">Mis Ejercicios</span>
-      </v-btn>
-      <v-btn class="btn" :to="{name: 'Routines'}">
-        <span class="mr-2">Guardar</span>
-      </v-btn>
+      </div>
     </div>
-  </div>
+    <v-btn class="btn" :to="{name: 'Exercises'}">
+      <span class="mr-2">Mis Ejercicios</span>
+    </v-btn>
+    <v-btn class="btn" :to="{name: 'Routines'}">
+      <span class="mr-2">Guardar</span>
+    </v-btn>
   </div>
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex';
-import {RoutinesCycle} from '../../api/routinesCycle'
+import {mapActions, mapState} from "vuex";
+import {RoutinesCycle} from "../../api/routinesCycle";
 import {CycleExercises} from "../../api/cyclesExercises";
 
 export default {
   name: "ModifyRoutine",
   data() {
     return {
-      exercisesNames: [],
       cycleTypes: ["warmup", "exercise", "cooldown"],
-      exerciseSelected: null,
-      cycleReps: 0,
-      cycleOrder: 0,
-      exerciseCycles: [],
-      exerciseOrder: 0,
-      cycleType: null,
+      warmupCycleContent: null,
+      exerciseCycleContent: null,
+      cooldownCycleContent: null
     }
   },
   computed: {
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
     }),
-    ...mapState('routinesCycle', {
-      $currentRoutineCycle: state => state.currentRoutineCycle,
-    })
   },
   methods: {
-    ...mapActions('exercise', {
-      $getAll: 'getAll',
-    }),
     ...mapActions('routinesCycle', {
       $createRoutineCycle: 'createRoutineCycle',
     }),
@@ -104,7 +92,7 @@ export default {
         this.cycleOrder++;
         this.exerciseOrder = 0;
         let descr = document.getElementById("cycleDescription").value;
-        const routineCycle = new RoutinesCycle(type, descr, type, this.cycleOrder, parseInt(this.cycleReps), this.$currentRoutine.id);
+        const routineCycle = new RoutinesCycle(type, descr, type, this.cycleOrder, this.cycleReps, this.$currentRoutine.id);
         await this.$createRoutineCycle(routineCycle);
       } catch(e) {
         this.setResult(e);
@@ -164,8 +152,6 @@ export default {
   border-radius: 10px;
   padding: 20px;
   width: auto;
-  margin-left: 20px;
-  margin-right: 20px;
   text-align: center;
   justify-content: center;
   overflow: hidden;
@@ -197,7 +183,7 @@ export default {
   opacity: 90%;
   font-weight: bold;
   margin-top: 0;
-  width: 100%;
+  width: auto;
 }
 
 .body {

@@ -5,9 +5,8 @@
         <b>Mi Rutinas</b>
       </div>
       <div class="routines">
-        <h1>Routine: {{$currentRoutine.name}}</h1>
+        <h1>Routine: Hola</h1>
         <div class="routine-details">
-          <p>{{$currentRoutine.detail}}</p>
         </div>
       </div>
     </div>
