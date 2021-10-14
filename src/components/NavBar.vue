@@ -57,7 +57,11 @@
       class="btn">
     <v-icon>mdi-account-outline</v-icon>
   </v-btn>
-  <v-btn :to="{name: 'Login'}" class="btn" :disabled="!canOperate" @click="logout">
+  <v-btn
+      :to="{name: 'Profile'}"
+      text
+      class="btn"
+      :disabled="!canOperate">
     <v-icon>mdi-logout-variant</v-icon>
   </v-btn>
 </div>
