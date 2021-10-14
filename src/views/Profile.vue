@@ -38,13 +38,19 @@
               <v-icon left>mdi-pencil-box-outline</v-icon>
             </button>
           </div>
-          <button v-if="changeName || changeLast || changeUser || changeEmail || changeGender" @click="saveChanges" id="sendBtn">Guardar cambios</button>
+          <button v-if="changeName || changeLast || changeUser || changeEmail || changeGender || uploaded" @click="saveChanges" id="sendBtn">Guardar cambios</button>
         </div>
       </div>
       <div class="grid-item">
         <div class="title pt-40">Foto de perfil</div>
-        <img src="https://alvareztaxinc.com/wp-content/uploads/2016/05/icon-user-default.png" alt="ProfilePic"
-             class="image">
+        <v-file-input accept="image/*" label="Agregar foto..." id="picture" @change="changePic"></v-file-input>
+        <div v-if="!hasPic">
+          <img src="https://alvareztaxinc.com/wp-content/uploads/2016/05/icon-user-default.png" alt="ProfilePic"
+               class="image">
+        </div>
+        <div v-else>
+          <img :src="$user.avatarUrl" alt="" class="image">
+        </div>
       </div>
     </div>
   </div>
@@ -64,7 +70,12 @@ export default {
       changeEmail: false,
       changeGender: false,
       genders: ["male", "female", "other"],
-      gender: null
+      gender: null,
+      hasPic: false,
+      uploaded: false,
+      picture: null,
+
+
     }
   },
 
@@ -109,6 +120,10 @@ export default {
     modifyGender() {
       this.changeGender = !this.changeGender;
     },
+    changePic(image) {
+      this.uploaded = true;
+      this.picture = URL.createObjectURL(image);
+    },
     async getCurrentUser() {
       //const user = await this.$getCurrentUser()
       this.username = this.$user.username;
@@ -116,6 +131,8 @@ export default {
       this.lastname = this.$user.lastName;
       this.mail = this.$user.email;
       this.gender = this.$user.gender;
+      this.picture = this.$user.avatarUrl;
+      this.hasPic = (this.$user.avatarUrl !== ".");
     },
     setResult(result){
       this.result = JSON.stringify(result, null, 2)
@@ -127,7 +144,7 @@ export default {
       try {
         let nombre = this.changeName ? document.getElementById("name").value : this.username;
         let apellido = this.changeLast ? document.getElementById("surname").value : this.lastname;
-        const credentials = new Credentials2(this.username, this.password, this.mail, nombre, apellido, this.gender);
+        const credentials = new Credentials2(this.username, this.password, this.mail, nombre, apellido, this.gender, this.picture);
         await this.$modifyUser(credentials);
         this.changeGender = this.changeName = this.changeLast = false;
         const redirectPath = this.$route.query.redirect || "/Profile";
