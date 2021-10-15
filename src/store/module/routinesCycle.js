@@ -16,15 +16,15 @@ export default {
         }
     },
     actions: {
-        async createRoutineCycle({commit}, routineCycle) {
+        async createRoutineCycle({dispatch}, routineCycle) {
             const result = await RoutinesCycleApi.add(routineCycle.routineId, routineCycle);
-            commit('currentRoutineCycle', result);
+            dispatch();
             return result;
         },
-        async getAllCycles({commit}, routineId) {
+        async getAllCyclesFromRoutine({commit}, routineId) {
             const result = await RoutinesCycleApi.getAll(routineId)
             commit('updateCurrentCycles', result.content);
-            return result.content;
+            return result;
         },
 
     },

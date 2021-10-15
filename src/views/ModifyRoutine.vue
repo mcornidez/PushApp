@@ -77,7 +77,14 @@ export default {
     })
   },
   async created() {
-    await this.getRoutineCycles();
+    const result =await this.getRoutineCycles();
+    if(result.totalCount !== 3) {
+      let i;
+      for(i = 0; i < 3; i++) {
+        await this.createRoutineCycle(this.cycleTypes[i]);
+      }
+      await this.getRoutineCycles();
+    }
   },
   methods: {
     ...mapActions('exercise', {
@@ -85,7 +92,7 @@ export default {
     }),
     ...mapActions('routinesCycle', {
       $createRoutineCycle: 'createRoutineCycle',
-      $getRoutineCycles: 'getAllCycles',
+      $getRoutineCycles: 'getAllCyclesFromRoutine',
     }),
     ...mapActions('cyclesExercises', {
       $addCycleExercise: 'addCycleExercise',
@@ -100,7 +107,8 @@ export default {
       this.result = null
     },
     async getRoutineCycles() {
-      await this.$getRoutineCycles(this.$currentRoutine.id);
+      const result = await this.$getRoutineCycles(this.$currentRoutine.id);
+      return result;
     },
     async getAllExercisesNames(){
       await this.$getAll();
@@ -115,28 +123,13 @@ export default {
     async createRoutineCycle(type) {
       try{
         this.selectCycleOrder(type);
-        this.exerciseOrder = 0;
-        let descr = document.getElementById("cycleDescription").value;
-        const routineCycle = new RoutinesCycle(type, descr, type, this.cycleOrder, parseInt(this.cycleReps), this.$currentRoutine.id);
+        const routineCycle = new RoutinesCycle(type, type, type, this.cycleOrder, 1, this.$currentRoutine.id);
         await this.$createRoutineCycle(routineCycle);
-        await this.getRoutineCycles();
       } catch(e) {
         this.setResult(e);
       }
     },
-    selectCycleOrder(type){
-      switch (type) {
-        case 'warmup':
-          this.cycleOrder = 1;
-          break;
-        case 'exercise':
-          this.cycleOrder = 2;
-          break;
-        case 'cooldown':
-          this.cycleOrder = 3;
-          break;
-      }
-    },
+
     async addExerciseToCycle(type) {
       try {
         this.selectCycleId(type);
@@ -154,6 +147,19 @@ export default {
       const result = await this.$getAllExercisesFromCycle(this.cycleId);
       this.exerciseOrder = result.totalCount;
       this.exerciseOrder++;
+    },
+    selectCycleOrder(type){
+      switch (type) {
+        case 'warmup':
+          this.cycleOrder = 1;
+          break;
+        case 'exercise':
+          this.cycleOrder = 2;
+          break;
+        case 'cooldown':
+          this.cycleOrder = 3;
+          break;
+      }
     },
     selectCycleId(type) {
       switch (type) {

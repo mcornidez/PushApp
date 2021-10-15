@@ -8,7 +8,7 @@
         <div class="grid-container">
           <div class="grid-item">
             <h2 style="text-decoration: underline">WARMUP</h2>
-            <div v-for="content in warmupCycleContent" v-bind:key="content" class="rutina">
+            <div v-for="content in routineCycles[0].exercises" v-bind:key="content.exercise.id" class="rutina">
               <p>{{content.exercise.name}}</p>
               <p>Duración: {{content.duration}}</p>
               <p>Repeticiones: {{content.repetitions}}</p>
@@ -16,7 +16,7 @@
           </div>
           <div class="grid-item">
             <h2 style="text-decoration: underline">EXERCISE</h2>
-            <div v-for="content in exerciseCycleContent" v-bind:key="content" class="rutina">
+            <div v-for="content in routineCycles[1].exercises" v-bind:key="content.exercise.id" class="rutina">
               <p>{{content.exercise.name}}</p>
               <p>Duración: {{content.duration}}</p>
               <p>Repeticiones: {{content.repetitions}}</p>
@@ -24,7 +24,7 @@
           </div>
           <div class="grid-item">
             <h2 style="text-decoration: underline">COOLDOWN</h2>
-            <div v-for="content in cooldownCycleContent" v-bind:key="content" class="rutina">
+            <div v-for="content in routineCycles[2].exercises" v-bind:key="content.exercise.id" class="rutina">
               <p>{{content.exercise.name}}</p>
               <p>Duración: {{content.duration}}</p>
               <p>Repeticiones: {{content.repetitions}}</p>
@@ -45,7 +45,7 @@
 
 <script>
 import {mapActions, mapState} from "vuex";
-import {RoutinesCycle} from "../../api/routinesCycle";
+import {RoutinesCycle, FullRoutineCycle} from "../../api/routinesCycle";
 import {CycleExercises} from "../../api/cyclesExercises";
 import GoBack from "../components/GoBack";
 
@@ -57,24 +57,40 @@ export default {
       cycleTypes: ["warmup", "exercise", "cooldown"],
       warmupCycleContent: null,
       exerciseCycleContent: null,
-      cooldownCycleContent: null
+      cooldownCycleContent: null,
+      routineCycles: [],
     }
   },
-  async setInfo(){
-    await this.getAll();
-  },
+
   computed: {
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
     }),
+    ...mapState('routinesCycle', {
+      $currentRoutineCycles: state => state.currentCycles,
+    }),
+    ...mapState('cyclesExercises', {
+      $exercisesFromCycle: state => state.exercisesFromCycle,
+    }),
+  },
+  async created() {
+    await this.$getAllCycles(this.$currentRoutine.id);
+    let i;
+    for(i = 0; i < 3; i++) {
+      await this.$getExercisesFromCycle(this.$currentRoutineCycles[i].id);
+      this.routineCycles.push(new FullRoutineCycle(this.$currentRoutineCycles[i].name,
+                                                  this.$currentRoutineCycles[i].repetitions,
+                                                    this.$currentRoutineCycles[i].id,  this.$exercisesFromCycle));
+    }
   },
   methods: {
     ...mapActions('routinesCycle', {
       $createRoutineCycle: 'createRoutineCycle',
+      $getAllCycles: 'getAllCyclesFromRoutine'
     }),
     ...mapActions('cyclesExercises', {
       $addCycleExercise: 'addCycleExercise',
-      $getAllCycles: 'getAll'
+      $getExercisesFromCycle: 'getAllExercisesFromCycle'
     }),
     setResult(result) {
       this.result = JSON.stringify(result, null, 2)
