@@ -57,7 +57,9 @@ export default {
     }
   },
   async created(){
+    await this.$getCurrentUser()
     await this.getAll();
+
   },
   computed: {
     ...mapState('security', {
@@ -69,6 +71,9 @@ export default {
       $retrieveUserRoutines: 'retrieveUserRoutines',
       $setActiveRoutine: 'setActiveRoutine',
       $delete: 'delete'
+    }),
+    ...mapActions('security',{
+      $getCurrentUser: 'getCurrentUser'
     }),
     ...mapState('routines', {
       $currentRoutine: state => state.currentRoutine,
