@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 export default {
   name: 'Rutinas',
   data() {
@@ -42,12 +42,17 @@ export default {
       $getAll: 'getAll',
       $setActiveRoutine: 'setActiveRoutine'
     }),
+    ...mapState('routines', {
+      $currentRoutine: state => state.currentRoutine,
+    }),
     async getAll(){
       let aux = await this.$getAll();
       this.routines = aux.content;
     },
     async setCurrent(routine){
       await this.$setActiveRoutine(routine);
+      const redirectPath = this.$route.query.redirect || "/routineview";
+      await this.$router.push(redirectPath);
     },
   }
 }

@@ -10,7 +10,7 @@
         <v-select v-model="type" :items="types" id="etype" class="input" placeholder="Tipo de ejercicio"/>
       </div>
       <v-btn class="btn" @click="create">
-        <span class="mr-2">Añadir Ejercicio</span>
+        <span>Añadir Ejercicio</span>
       </v-btn>
       <GoBack/>
     </div>

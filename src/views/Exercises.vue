@@ -6,8 +6,9 @@
     </div>
     <div class="buttons">
       <v-btn class="btn" :to="{name: 'AddExercise'}">
-        <span class="mr-2 text--black">Añadir ejercicio</span>
+        <span class="text--black">Añadir ejercicio</span>
       </v-btn>
+      <GoBack/>
     </div>
     <div class="routines">
       <div class="grid-container">
@@ -37,8 +38,13 @@
 
 <script>
 import {mapActions, mapState} from "vuex";
+import GoBack from "../components/GoBack.vue";
+
 export default {
   name: 'Exercises',
+  components:{
+    GoBack
+  },
   data() {
     return {
       id: null,

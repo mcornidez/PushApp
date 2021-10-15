@@ -9,7 +9,7 @@
           <div class="grid-item">
             <h2 style="text-decoration: underline">WARMUP</h2>
             <div v-for="content in routineCycles[0].exercises" v-bind:key="content.exercise.id" class="rutina">
-              <p>{{content.exercise.name}}</p>
+              <p class="routineName">{{content.exercise.name}}</p>
               <p>Duración: {{content.duration}}</p>
               <p>Repeticiones: {{content.repetitions}}</p>
             </div>
@@ -17,7 +17,7 @@
           <div class="grid-item">
             <h2 style="text-decoration: underline">EXERCISE</h2>
             <div v-for="content in routineCycles[1].exercises" v-bind:key="content.exercise.id" class="rutina">
-              <p>{{content.exercise.name}}</p>
+              <p class="routineName">{{content.exercise.name}}</p>
               <p>Duración: {{content.duration}}</p>
               <p>Repeticiones: {{content.repetitions}}</p>
             </div>
@@ -25,7 +25,7 @@
           <div class="grid-item">
             <h2 style="text-decoration: underline">COOLDOWN</h2>
             <div v-for="content in routineCycles[2].exercises" v-bind:key="content.exercise.id" class="rutina">
-              <p>{{content.exercise.name}}</p>
+              <p class="routineName">{{content.exercise.name}}</p>
               <p>Duración: {{content.duration}}</p>
               <p>Repeticiones: {{content.repetitions}}</p>
             </div>
@@ -34,10 +34,10 @@
       </div>
     </div>
     <v-btn class="btn" :to="{name: 'Exercises'}">
-      <span class="mr-2">Mis Ejercicios</span>
+      <span>Mis Ejercicios</span>
     </v-btn>
     <v-btn class="btn" :to="{name: 'Routines'}">
-      <span class="mr-2">Guardar</span>
+      <span>Guardar</span>
     </v-btn>
     <GoBack/>
   </div>
@@ -167,14 +167,30 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 20px;
-  width: auto;
+  width: 20vw;
   text-align: center;
   justify-content: center;
   overflow: hidden;
 }
+
+.routineName{
+  font-weight: bolder;
+  font-size: large;
+  text-underline: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.rutina{
+  border: 1px black solid;
+  margin-top: 10px;
+  border-radius: 10px;
+}
 .btn {
   margin: 15px;
   background-color: white;
+  color: black;
+  font-weight: bolder;
 }
 .ex-box{
   font-family: "Raleway", sans-serif;

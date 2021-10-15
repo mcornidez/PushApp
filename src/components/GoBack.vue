@@ -3,7 +3,7 @@
       <button @click="goBack" class="btn text--black">Go Back</button>
     </span>-->
   <v-btn class="btn" @click="goBack">
-    <span class="mr-2">Volver</span>
+    <span>Volver</span>
   </v-btn>
 </template>
 

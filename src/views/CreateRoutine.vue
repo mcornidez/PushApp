@@ -11,7 +11,7 @@
         <v-select v-model="difficulty" :items="difficulties" id="routineDifficulty" class="input" placeholder="Dificultad"/>
       </div>
       <v-btn class="btn" @click="create">
-        <span class="mr-2 text--black">Crear Rutina</span>
+        <span class="text--black">Crear Rutina</span>
       </v-btn>
     </div>
     <GoBack/>

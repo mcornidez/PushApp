@@ -10,8 +10,10 @@
         <v-select v-model="exType" :items="types" id="exType" class="input pt-8 mt-0" placeholder="Tipo de ejercicio"/>
       </div>
       <v-btn class="btn" @click="modify">
-        <span class="mr-2">Modificar ejercicio</span>
+        <span>Modificar ejercicio</span>
       </v-btn>
+      <v-spacer></v-spacer>
+      <GoBack/>
       <br>
     </div>
   </div>
@@ -20,9 +22,13 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import {Exercise} from "../../api/exercise";
+import GoBack from "../components/GoBack.vue";
 
 export default {
   name: "ModifyExercise",
+  components:{
+    GoBack
+  },
   data(){
     return{
       types:["exercise", "rest"],
