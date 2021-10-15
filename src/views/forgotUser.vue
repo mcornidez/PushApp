@@ -88,7 +88,7 @@ h1{
   height: 100vh;
 }
 .form{
-  background-color: lightblue;
+  background-color: rgba(255,255,255, 0.9);
   width: 60vw;
   font-size: xx-large;
   font-family: "Raleway", sans-serif;

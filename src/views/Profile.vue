@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="body">
       <div id="title">
-        <b>Modificar Rutina</b>
+        <b>Mi perfil</b>
       </div>
       <div class="grid-container">
         <div class="form-item">
