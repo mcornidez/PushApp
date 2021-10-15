@@ -163,7 +163,7 @@ export default {
   grid-row-gap: 30px;
 }
 .grid-item {
-  background-color: rgba(232,232,232,0.8);
+  background-color: rgba(232,232,232);
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 20px;

@@ -28,16 +28,16 @@
                 <input id="wreps" type="number" min=0 class="input" placeholder="Repeticiones"/>
               </div>
               <v-btn class="btn" @click=addExerciseToCycle(type)>
-                <span class="mr-2">Añadir Ejercicio</span>
+                <span>Añadir Ejercicio</span>
               </v-btn>
             </div>
           </div>
         </div>
       <v-btn class="btn" :to="{name: 'Exercises'}">
-        <span class="mr-2">Mis Ejercicios</span>
+        <span>Mis Ejercicios</span>
       </v-btn>
       <v-btn class="btn" :to="{name: 'Routines'}">
-        <span class="mr-2">Guardar</span>
+        <span>Guardar</span>
       </v-btn>
     </div>
   </div>
@@ -226,6 +226,8 @@ export default {
 .btn {
   margin: 15px;
   background-color: white;
+  color: black;
+  font-weight: bolder;
 }
 .ex-box{
   font-family: "Raleway", sans-serif;

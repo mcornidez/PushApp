@@ -70,6 +70,10 @@ export default {
   align-items: center;
   margin: 30px;
 }
+.btn{
+  color: black;
+  font-weight: bolder;
+}
 
 #background{
   background-image: url("../assets/FondoRutinas.jpeg");
