@@ -16,9 +16,9 @@ export default {
         }
     },
     actions: {
-        async createRoutineCycle({dispatch}, routineCycle) {
+        async createRoutineCycle({commit}, routineCycle) {
             const result = await RoutinesCycleApi.add(routineCycle.routineId, routineCycle);
-            dispatch();
+            commit();
             return result;
         },
         async getAllCyclesFromRoutine({commit}, routineId) {

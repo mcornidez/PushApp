@@ -12,13 +12,13 @@
           <div v-for="type in cycleTypes" v-bind:key="type" class="rutina">
             <div class="grid-item">
               <h2 style="text-decoration: underline">{{type.toUpperCase()}}</h2>
-              <div class="form">
-                <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>
-                <input v-model="cycleReps" type="number" min=0 id="repetitions" class="input" placeholder="Repeticiones"/>
-              </div>
-              <v-btn class="btn" @click="createRoutineCycle(type)">
-                <span class="mr-2">Crear circuito</span>
-              </v-btn>
+<!--              <div class="form">-->
+<!--                <input type="text" id="cycleDescription" class="input" placeholder="Breve descripción"/>-->
+<!--                <input v-model="cycleReps" type="number" min=0 id="repetitions" class="input" placeholder="Repeticiones"/>-->
+<!--              </div>-->
+<!--              <v-btn class="btn" @click="createRoutineCycle(type)">-->
+<!--                <span class="mr-2">Crear circuito</span>-->
+<!--              </v-btn>-->
               <div v-for="exercise in exerciseCycles" v-bind:key="exercise" class="ex">
                 <p>{{exercise.name}}, {{duration}} secs, {{repetitions}} reps</p>
               </div>
@@ -126,7 +126,7 @@ export default {
         const routineCycle = new RoutinesCycle(type, type, type, this.cycleOrder, 1, this.$currentRoutine.id);
         await this.$createRoutineCycle(routineCycle);
       } catch(e) {
-        this.setResult(e);
+        // this.setResult(e);
       }
     },
 
