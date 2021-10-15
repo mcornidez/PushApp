@@ -1,55 +1,58 @@
 <template>
   <div class="profile">
-    <!-- Template extraido de https://stackoverflow.com/questions/63729323/vuetify-custom-component-for-user-profile -->
-    <div class="title width:80%;">Datos de usuario: {{ $user.username }}</div>
-    <div class="grid-container">
-      <div class="form-item">
-        <div>
-          <div class="item">
-            <div class="align-center pl-5 mt-6"><b>Nombre de usuario: </b>{{ $user.username }}</div>
-          </div>
-          <div class="item">
-            <div class="align-center pl-5 mt-6"><b>Mail: </b>{{ $user.email }}</div>
-          </div>
-          <div class="item">
-            <div class="align-center pl-5 mt-6" v-if="!changeName"><b>Nombre: </b> {{ $user.firstName }}</div>
-            <div class="width:100%; ml-5" v-else>
-              <v-text-field class="mt-6" outlined label="Nombre: " v-model="firstname" id="name"></v-text-field>
-            </div>
-            <button @click="modifyName" class="btn pa-0 mt-6">
-              <v-icon left>mdi-pencil-box-outline</v-icon>
-            </button>
-          </div>
-          <div class="item">
-            <div class="align-center pl-5 mt-6" v-if="!changeLast"><b>Apellido: </b>{{ $user.lastName }}</div>
-            <div class="width:100%; ml-5" v-else>
-              <v-text-field class="mt-6" outlined label="Apellido: " v-model="lastname" id="surname"></v-text-field>
-            </div>
-            <button @click="modifyLast" class="btn pa-0 mt-6">
-              <v-icon left>mdi-pencil-box-outline</v-icon>
-            </button>
-          </div>
-          <div class="item">
-            <div class="pl-5 mt-6" v-if="!changeGender"><b>Género: </b>{{ $user.gender }}</div>
-            <div class="width:100%; ml-5" v-else>
-              <v-select v-model="gender" :items="genders" id="gender" class="mt-6" placeholder="Género"/>
-            </div>
-            <button @click="modifyGender" class="btn pa-0 mt-6">
-              <v-icon left>mdi-pencil-box-outline</v-icon>
-            </button>
-          </div>
-          <button v-if="changeName || changeLast || changeUser || changeEmail || changeGender || uploaded" @click="saveChanges" id="sendBtn">Guardar cambios</button>
-        </div>
+    <div class="body">
+      <div id="title">
+        <b>Modificar Rutina</b>
       </div>
-      <div class="grid-item">
-        <div class="title pt-40">Foto de perfil</div>
-        <v-file-input accept="image/*" label="Agregar foto..." id="picture" @change="changePic"></v-file-input>
-        <div v-if="!hasPic">
-          <img src="https://alvareztaxinc.com/wp-content/uploads/2016/05/icon-user-default.png" alt="ProfilePic"
-               class="image">
+      <div class="grid-container">
+        <div class="form-item">
+          <div>
+            <div class="item">
+              <div class="align-center pl-5 mt-6"><b>Nombre de usuario: </b>{{ $user.username }}</div>
+            </div>
+            <div class="item">
+              <div class="align-center pl-5 mt-6"><b>Mail: </b>{{ $user.email }}</div>
+            </div>
+            <div class="item">
+              <div class="align-center pl-5 mt-6" v-if="!changeName"><b>Nombre: </b> {{ $user.firstName }}</div>
+              <div class="width:100%; ml-5" v-else>
+                <v-text-field class="mt-6" outlined label="Nombre: " v-model="firstname" id="name"></v-text-field>
+              </div>
+              <button @click="modifyName" class="btn pa-0 mt-6">
+                <v-icon left>mdi-pencil-box-outline</v-icon>
+              </button>
+            </div>
+            <div class="item">
+              <div class="align-center pl-5 mt-6" v-if="!changeLast"><b>Apellido: </b>{{ $user.lastName }}</div>
+              <div class="width:100%; ml-5" v-else>
+                <v-text-field class="mt-6" outlined label="Apellido: " v-model="lastname" id="surname"></v-text-field>
+              </div>
+              <button @click="modifyLast" class="btn pa-0 mt-6">
+                <v-icon left>mdi-pencil-box-outline</v-icon>
+              </button>
+            </div>
+            <div class="item">
+              <div class="pl-5 mt-6" v-if="!changeGender"><b>Género: </b>{{ $user.gender }}</div>
+              <div class="width:100%; ml-5" v-else>
+                <v-select v-model="gender" :items="genders" id="gender" class="mt-6" placeholder="Género"/>
+              </div>
+              <button @click="modifyGender" class="btn pa-0 mt-6">
+                <v-icon left>mdi-pencil-box-outline</v-icon>
+              </button>
+            </div>
+            <button v-if="changeName || changeLast || changeUser || changeEmail || changeGender || uploaded" @click="saveChanges" id="sendBtn">Guardar cambios</button>
+          </div>
         </div>
-        <div v-else>
-          <img :src="$user.avatarUrl" alt="" class="image">
+        <div class="grid-item">
+          <div id="titulo2">Foto de perfil</div>
+          <v-file-input accept="image/*" label="Agregar foto..." id="picture" @change="changePic"></v-file-input>
+          <div v-if="!hasPic">
+            <img src="https://alvareztaxinc.com/wp-content/uploads/2016/05/icon-user-default.png" alt="ProfilePic"
+                 class="image">
+          </div>
+          <div v-else>
+            <img :src="$user.avatarUrl" alt="profilePicture" class="image">
+          </div>
         </div>
       </div>
     </div>
@@ -168,18 +171,28 @@ export default {
   background-color: white;
   /*display: flex;*/
 }
-.title{
-  font-size: xx-large;
+
+#title{
   font-family: "Raleway", sans-serif;
-  background-color: white;
-  width:80%;
+  font-size: xxx-large;
+  padding-bottom: 0;
   margin: auto;
-  justify-content: center;
-  padding-top: 15px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom: 1px solid black;
+  vertical-align: middle;
+  border-radius: 15px;
+  width: 40vw;
+  background-color: lightblue;
+  position: center;
+  border: 3px solid black;
+  margin-bottom: 15px;
 }
+
+#titulo2{
+  font-family: "Raleway", sans-serif;
+  font-size: x-large;
+  text-underline: black;
+  padding-bottom: 10px;
+}
+
 .profile{
   background-image: url("../assets/ProfileFondo.jpg");
   background-size: cover;
@@ -205,8 +218,11 @@ export default {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-column-gap: 30px;
   grid-row-gap: 30px;
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-radius: 25px;
+}
+
+.body{
+  padding-top: 30px;
 }
 
 .item{
